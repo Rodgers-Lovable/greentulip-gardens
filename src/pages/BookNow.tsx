@@ -95,7 +95,7 @@ export default function BookNow() {
               Start Planning
             </p>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-semibold text-cream mb-6">
-              Book Your Event
+              Book With Us
             </h1>
             <p className="text-cream/90 text-lg max-w-2xl mx-auto">
               Ready to create unforgettable memories? Complete the form below and our 

@@ -1,18 +1,18 @@
-import { useState } from 'react';
-import { X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
+import { useState } from "react";
+import { X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { cn } from '@/lib/utils';
-import { useToast } from '@/hooks/use-toast';
+} from "@/components/ui/select";
+import { cn } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
 
 interface QuoteModalProps {
   isOpen: boolean;
@@ -21,25 +21,25 @@ interface QuoteModalProps {
 }
 
 const eventTypes = [
-  'Wedding & Ceremony',
-  'Picnic & Day Out',
-  'Accommodation',
-  'Team Building & Retreat',
-  'Photoshoot & Filming',
-  'Other',
+  "Wedding & Ceremony",
+  "Picnic & Day Out",
+  "Accommodation",
+  "Team Building & Retreat",
+  "Photoshoot & Filming",
+  "Other",
 ];
 
 export function QuoteModal({ isOpen, onClose, eventType }: QuoteModalProps) {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    fullName: '',
-    phone: '',
-    email: '',
-    eventType: eventType || '',
-    preferredDate: '',
-    guests: '',
-    message: '',
+    fullName: "",
+    phone: "",
+    email: "",
+    eventType: eventType || "",
+    preferredDate: "",
+    guests: "",
+    message: "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -50,19 +50,19 @@ export function QuoteModal({ isOpen, onClose, eventType }: QuoteModalProps) {
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
     toast({
-      title: 'Quote Request Sent!',
-      description: 'We\'ll get back to you within 24 hours.',
+      title: "Quote Request Sent!",
+      description: "We'll get back to you within 24 hours.",
     });
 
     setIsSubmitting(false);
     setFormData({
-      fullName: '',
-      phone: '',
-      email: '',
-      eventType: eventType || '',
-      preferredDate: '',
-      guests: '',
-      message: '',
+      fullName: "",
+      phone: "",
+      email: "",
+      eventType: eventType || "",
+      preferredDate: "",
+      guests: "",
+      message: "",
     });
     onClose();
   };
@@ -80,9 +80,9 @@ export function QuoteModal({ isOpen, onClose, eventType }: QuoteModalProps) {
       {/* Modal */}
       <div
         className={cn(
-          'relative w-full max-w-lg mx-4 bg-cream rounded-2xl shadow-large',
-          'max-h-[90vh] overflow-y-auto',
-          'animate-fade-up'
+          "relative w-full max-w-2xl mx-4 bg-cream rounded-xl shadow-large",
+          "max-h-[90vh] overflow-y-auto",
+          "animate-fade-up"
         )}
       >
         {/* Header */}
@@ -168,7 +168,10 @@ export function QuoteModal({ isOpen, onClose, eventType }: QuoteModalProps) {
           {/* Date and Guests Row */}
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="preferredDate" className="text-forest font-medium">
+              <Label
+                htmlFor="preferredDate"
+                className="text-forest font-medium"
+              >
                 Preferred Date <span className="text-gold">*</span>
               </Label>
               <Input
@@ -204,7 +207,8 @@ export function QuoteModal({ isOpen, onClose, eventType }: QuoteModalProps) {
           {/* Email (Optional) */}
           <div className="space-y-2">
             <Label htmlFor="email" className="text-forest font-medium">
-              Email Address <span className="text-muted-foreground text-sm">(optional)</span>
+              Email Address{" "}
+              <span className="text-muted-foreground text-sm">(optional)</span>
             </Label>
             <Input
               id="email"
@@ -221,7 +225,8 @@ export function QuoteModal({ isOpen, onClose, eventType }: QuoteModalProps) {
           {/* Message (Optional) */}
           <div className="space-y-2">
             <Label htmlFor="message" className="text-forest font-medium">
-              Special Requests <span className="text-muted-foreground text-sm">(optional)</span>
+              Special Requests{" "}
+              <span className="text-muted-foreground text-sm">(optional)</span>
             </Label>
             <Textarea
               id="message"
@@ -243,7 +248,7 @@ export function QuoteModal({ isOpen, onClose, eventType }: QuoteModalProps) {
             className="w-full"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Sending...' : 'Request Quote'}
+            {isSubmitting ? "Sending..." : "Request Quote"}
           </Button>
         </form>
       </div>

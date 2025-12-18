@@ -1,0 +1,46 @@
+{
+  "company": {
+    "name": "GreenTulip Gardens",
+    "firstName": "GreenTulip",
+    "lastName": "Gardens",
+    "address": {
+      "city": "Meru County",
+      "town": "Nkubu",
+      "country": "Kenya",
+      "full": "Nkubu, Meru County. Kenya"
+    },
+    "contact": {
+      "phone": "+254781289226",
+      "phone1": "+254713298682",
+      "email": "maureengacheri@gmail.com",
+      "website": "https://greentulip.co.ke"
+    },
+    "mission": "",
+    "vision": "",
+    "values": [
+      {
+        "title": "Nature First",
+        "description": "We preserve and enhance our natural environment, ensuring our gardens remain a sanctuary for both guests and wildlife."
+      },
+      {
+        "title": "Heartfelt Service",
+        "description": "Every guest is treated like family. We go above and beyond to ensure your experience exceeds expectations."
+      },
+      {
+        "title": "Excellence Always",
+        "description": "From our manicured lawns to our attentive service, we maintain the highest standards in everything we do."
+      },
+      {
+        "title": "Community Focused",
+        "description": "We proudly support local suppliers and contribute to the growth of Meru County's hospitality sector."
+      }
+    ]
+  },
+  "developer": {
+    "contact": {
+      "phone": "+254712413243",
+      "email": "brianmawira2@gmail.com",
+      "website": "https://mawirab.com"
+    }
+  }
+}
