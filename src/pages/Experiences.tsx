@@ -1,56 +1,23 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowRight, Heart, TreePine, Building, Users, Camera } from 'lucide-react';
-import { Layout } from '@/components/layout/Layout';
-import { Button } from '@/components/ui/button';
-import { QuoteModal } from '@/components/QuoteModal';
-import heroImage from '@/assets/hero-home.jpg';
-
-const experiences = [
-  {
-    icon: Heart,
-    title: 'Weddings & Ceremonies',
-    description: 'Say "I do" surrounded by lush gardens, blooming flowers, and the majestic backdrop of Meru\'s landscapes. Our venue offers multiple ceremony locations, from intimate garden nooks to grand open lawns.',
-    features: ['Multiple ceremony locations', 'Bridal preparation rooms', 'Guest parking', 'Customizable setups'],
-    href: '/experiences/weddings',
-    capacity: 'Up to 500 guests',
-  },
-  {
-    icon: TreePine,
-    title: 'Picnics & Day Outs',
-    description: 'Escape the everyday and immerse yourself in nature. Perfect for family gatherings, birthday celebrations, or a peaceful day with friends amidst our beautiful grounds.',
-    features: ['Picnic areas', 'Garden walks', 'Children\'s play areas', 'Shaded spots'],
-    href: '/experiences/picnics',
-    capacity: 'Groups of 2-100',
-  },
-  {
-    icon: Building,
-    title: 'Accommodation',
-    description: 'Extend your stay in our charming cottages nestled within the gardens. Wake up to birdsong, enjoy mountain views, and experience the tranquility of rural Kenya.',
-    features: ['Comfortable cottages', 'En-suite bathrooms', 'Breakfast included', 'Garden views'],
-    href: '/experiences/accommodation',
-    capacity: 'Various room options',
-  },
-  {
-    icon: Users,
-    title: 'Team Building & Retreats',
-    description: 'Inspire your team in an environment designed for creativity and connection. Our grounds provide the perfect setting for workshops, strategy sessions, and team bonding.',
-    features: ['Conference facilities', 'Outdoor activities', 'Catering options', 'Breakout spaces'],
-    href: '/experiences/team-building',
-    capacity: 'Up to 200 participants',
-  },
-  {
-    icon: Camera,
-    title: 'Photoshoots & Filming',
-    description: 'Capture stunning visuals against our diverse natural backdrops. From golden hour portraits to professional video productions, our gardens offer endless creative possibilities.',
-    features: ['Diverse backdrops', 'Natural lighting', 'Changing facilities', 'Flexible hours'],
-    href: '/experiences/photoshoots',
-    capacity: 'All production sizes',
-  },
-];
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  Heart,
+  TreePine,
+  Building,
+  Users,
+  Camera,
+} from "lucide-react";
+import { Layout } from "@/components/layout/Layout";
+import { Button } from "@/components/ui/button";
+import { QuoteModal } from "@/components/QuoteModal";
+import heroImage from "@/assets/hero-home.jpg";
+import experiencesData from "@/data/experiences.json";
 
 export default function Experiences() {
+  const { experiences } = experiencesData;
+
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
   return (
@@ -76,8 +43,8 @@ export default function Experiences() {
               Our Experiences
             </h1>
             <p className="text-cream/90 text-lg max-w-2xl mx-auto">
-              From dream weddings to peaceful retreats, discover the perfect experience 
-              for your next celebration at GreenTulip Gardens
+              From dream weddings to peaceful retreats, discover the perfect
+              experience for your next celebration at GreenTulip Gardens
             </p>
           </motion.div>
         </div>
@@ -95,15 +62,17 @@ export default function Experiences() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 className={`grid lg:grid-cols-2 gap-12 items-center ${
-                  index % 2 === 1 ? 'lg:flex-row-reverse' : ''
+                  index % 2 === 1 ? "lg:flex-row-reverse" : ""
                 }`}
               >
-                <div className={index % 2 === 1 ? 'lg:order-2' : ''}>
+                <div className={index % 2 === 1 ? "lg:order-2" : ""}>
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-12 h-12 bg-forest/10 rounded-xl flex items-center justify-center">
-                      <experience.icon className="h-6 w-6 text-forest" />
+                      {/* {<experience.icon className="h-6 w-6 text-forest" />} */}
                     </div>
-                    <span className="text-gold text-sm font-medium">{experience.capacity}</span>
+                    <span className="text-gold text-sm font-medium">
+                      {experience.capacity}
+                    </span>
                   </div>
                   <h2 className="font-heading text-3xl md:text-4xl text-forest mb-4">
                     {experience.title}
@@ -112,8 +81,11 @@ export default function Experiences() {
                     {experience.description}
                   </p>
                   <ul className="grid grid-cols-2 gap-3 mb-8">
-                    {experience.features.map((feature) => (
-                      <li key={feature} className="flex items-center gap-2 text-sm text-foreground">
+                    {experience.features.slice(0, 4).map((feature) => (
+                      <li
+                        key={feature}
+                        className="flex items-center gap-2 text-sm text-foreground"
+                      >
                         <div className="w-1.5 h-1.5 bg-gold rounded-full" />
                         {feature}
                       </li>
@@ -134,7 +106,7 @@ export default function Experiences() {
                     </Button>
                   </div>
                 </div>
-                <div className={`${index % 2 === 1 ? 'lg:order-1' : ''}`}>
+                <div className={`${index % 2 === 1 ? "lg:order-1" : ""}`}>
                   <div className="bg-secondary rounded-2xl aspect-[4/3] overflow-hidden">
                     <img
                       src={heroImage}
@@ -162,7 +134,7 @@ export default function Experiences() {
               Ready to Plan Your Experience?
             </h2>
             <p className="text-cream/80 text-lg mb-8">
-              Contact us today to discuss your requirements and receive a 
+              Contact us today to discuss your requirements and receive a
               personalized quote for your event.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

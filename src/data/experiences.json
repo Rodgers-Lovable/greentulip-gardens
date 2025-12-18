@@ -1,12 +1,13 @@
 {
-  "services": [
+  "experiences": [
     {
       "title": "Weddings & Ceremonies",
       "subtitle": "Your Dream Wedding Venue in Meru",
-      "icon": "",
+      "icon": "heart",
+      "href": "/experiences/weddings",
       "slogan": "Say \"I do\" in a stunning garden setting. Create unforgettable memories surrounded by natural beauty and the majestic landscapes of Meru County.",
       "description": "From intimate garden ceremonies to grand celebrations, GreenTulip Gardens provides the perfect canvas for your love story. Our experienced team will work with you to bring your wedding vision to life.",
-      "itinerary": [
+      "features": [
         "Multiple ceremony locations",
         "Bridal suite with preparation area",
         "Ample guest parking",
@@ -15,15 +16,16 @@
         "On-site coordination support",
         "Garden photo opportunities"
       ],
-      "moreInfo": "Up to 500 guests"
+      "capacity": "Up to 500 guests"
     },
     {
       "title": "Picnics & Day Outs",
       "subtitle": "A Perfect Day in Nature",
-      "icon": "",
+      "icon": "tree",
+      "href": "/experiences/picnics",
       "slogan": "Escape the everyday and reconnect with nature. Perfect for family gatherings, birthday celebrations, or a peaceful day with friends.",
       "description": "Leave the hustle behind and spend quality time in our beautiful gardens. Whether you're celebrating a special occasion or simply seeking peace, our grounds offer the ideal setting for a memorable day out.",
-      "itinerary": [
+      "features": [
         "Scenic picnic spots",
         "Garden walking paths",
         "Clean restroom facilities",
@@ -32,15 +34,16 @@
         "Parking included",
         "Photography friendly"
       ],
-      "moreInfo": "Groups of 2-100"
+      "capacity": "Groups of 2-100"
     },
     {
       "title": "Accommodation",
       "subtitle": "Stay in Nature's Embrace",
       "slogan": "Extend your stay in our charming cottages nestled within the gardens. Wake up to birdsong, enjoy mountain views, and experience the tranquility of rural Kenya.",
-      "icon": "",
+      "icon": "building",
+      "href": "/experiences/accommodation",
       "description": "Our cottages offer a peaceful retreat where you can unwind after your event or simply enjoy a getaway. Each accommodation is designed to blend comfort with the natural beauty of our surroundings.",
-      "itinerary": [
+      "features": [
         "Comfortable cottages",
         "Breakfast included",
         "Garden views",
@@ -49,15 +52,16 @@
         "24-hour security",
         "Wake up to birdsong"
       ],
-      "moreInfo": "Various room options"
+      "capacity": "Various room options"
     },
     {
       "title": "Team Building & Retreats",
       "subtitle": "Where Teams Thrive",
       "slogan": "Inspire your team in an environment designed for creativity and connection. Our grounds provide the perfect setting for workshops, strategy sessions, and team bonding.",
-      "icon": "",
+      "icon": "users",
+      "href": "/experiences/team-building",
       "description": "Step away from the ordinary and bring your team to a space where nature inspires innovation. Our venue provides the perfect blend of professional facilities and refreshing outdoor environments.",
-      "itinerary": [
+      "features": [
         "Conference facilities",
         "Outdoor activities",
         "Catering options",
@@ -66,15 +70,16 @@
         "Team activity planning",
         "Flexible scheduling"
       ],
-      "moreInfo": "Up to 200 participants"
+      "capacity": "Up to 200 participants"
     },
     {
       "title": "Photoshoots & Filming",
       "subtitle": "Your Creative Canvas",
       "slogan": "Capture stunning visuals against our diverse natural backdrops. From golden hour portraits to professional video productions, our gardens offer endless creative possibilities.",
-      "icon": "",
+      "icon": "camera",
+      "href": "/experiences/photoshoots",
       "description": "Our sprawling gardens offer a variety of natural backdrops - from lush green lawns to flowering gardens and rustic pathways. Whatever your creative vision, we provide the perfect setting.",
-      "itinerary": [
+      "features": [
         "Diverse backdrops",
         "Natural lighting",
         "Flexible hours",
@@ -82,7 +87,7 @@
         "Multiple scenic locations",
         "Golden hour lighting"
       ],
-      "moreInfo": "All production sizes"
+      "capacity": "All production sizes"
     }
   ]
 }
