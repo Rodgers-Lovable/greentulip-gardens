@@ -1,9 +1,14 @@
-import { MessageCircle } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { MessageCircle } from "lucide-react";
+import { cn } from "@/lib/utils";
+import companyData from "@/data/company.json";
+import WhatsappLogo from "@/assets/whatsapp.webp";
 
 export function WhatsAppButton() {
-  const phoneNumber = '254700000000';
-  const message = encodeURIComponent('Hello! I would like to enquire about GreenTulip Gardens.');
+  const { company } = companyData;
+  const phoneNumber = company.contact.phone;
+  const message = encodeURIComponent(
+    "Hello! I would like to enquire about GreenTulip Gardens."
+  );
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
 
   return (
@@ -12,19 +17,16 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        'fixed bottom-6 right-6 z-40',
-        'flex items-center gap-3 px-5 py-3',
-        'bg-[#25D366] text-white rounded-full',
-        'shadow-large hover:shadow-glow',
-        'transition-all duration-300 hover:scale-105',
-        'group'
+        "fixed bottom-10 right-8 z-40",
+        "flex items-center gap-3 p-3",
+        "rounded-full",
+        "shadow-large hover:shadow-glow",
+        "transition-all duration-300 hover:scale-105",
+        "group"
       )}
       aria-label="Chat on WhatsApp"
     >
-      <MessageCircle className="h-6 w-6" />
-      <span className="font-medium hidden sm:inline group-hover:inline">
-        WhatsApp Us
-      </span>
+      <img width={70} src={WhatsappLogo} alt={whatsappUrl} />
     </a>
   );
 }
