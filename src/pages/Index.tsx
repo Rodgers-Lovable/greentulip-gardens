@@ -5,7 +5,7 @@ import { ArrowRight, Heart, Users, Camera, Building, TreePine } from 'lucide-rea
 import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { QuoteModal } from '@/components/QuoteModal';
-import heroImage from '@/assets/hero-home.jpg';
+import heroImage from '@/assets/images/grounds.jpeg';
 
 const experiences = [
   {
