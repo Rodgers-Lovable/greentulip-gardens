@@ -1,0 +1,88 @@
+{
+  "services": [
+    {
+      "title": "Weddings & Ceremonies",
+      "subtitle": "Your Dream Wedding Venue in Meru",
+      "icon": "",
+      "slogan": "Say \"I do\" in a stunning garden setting. Create unforgettable memories surrounded by natural beauty and the majestic landscapes of Meru County.",
+      "description": "From intimate garden ceremonies to grand celebrations, GreenTulip Gardens provides the perfect canvas for your love story. Our experienced team will work with you to bring your wedding vision to life.",
+      "itinerary": [
+        "Multiple ceremony locations",
+        "Bridal suite with preparation area",
+        "Ample guest parking",
+        "Customizable decor options",
+        "Indoor and outdoor reception areas",
+        "On-site coordination support",
+        "Garden photo opportunities"
+      ],
+      "moreInfo": "Up to 500 guests"
+    },
+    {
+      "title": "Picnics & Day Outs",
+      "subtitle": "A Perfect Day in Nature",
+      "icon": "",
+      "slogan": "Escape the everyday and reconnect with nature. Perfect for family gatherings, birthday celebrations, or a peaceful day with friends.",
+      "description": "Leave the hustle behind and spend quality time in our beautiful gardens. Whether you're celebrating a special occasion or simply seeking peace, our grounds offer the ideal setting for a memorable day out.",
+      "itinerary": [
+        "Scenic picnic spots",
+        "Garden walking paths",
+        "Clean restroom facilities",
+        "Bring your own food allowed",
+        "Children's play area",
+        "Parking included",
+        "Photography friendly"
+      ],
+      "moreInfo": "Groups of 2-100"
+    },
+    {
+      "title": "Accommodation",
+      "subtitle": "Stay in Nature's Embrace",
+      "slogan": "Extend your stay in our charming cottages nestled within the gardens. Wake up to birdsong, enjoy mountain views, and experience the tranquility of rural Kenya.",
+      "icon": "",
+      "description": "Our cottages offer a peaceful retreat where you can unwind after your event or simply enjoy a getaway. Each accommodation is designed to blend comfort with the natural beauty of our surroundings.",
+      "itinerary": [
+        "Comfortable cottages",
+        "Breakfast included",
+        "Garden views",
+        "En-suite bathrooms",
+        "Free Wi-Fi",
+        "24-hour security",
+        "Wake up to birdsong"
+      ],
+      "moreInfo": "Various room options"
+    },
+    {
+      "title": "Team Building & Retreats",
+      "subtitle": "Where Teams Thrive",
+      "slogan": "Inspire your team in an environment designed for creativity and connection. Our grounds provide the perfect setting for workshops, strategy sessions, and team bonding.",
+      "icon": "",
+      "description": "Step away from the ordinary and bring your team to a space where nature inspires innovation. Our venue provides the perfect blend of professional facilities and refreshing outdoor environments.",
+      "itinerary": [
+        "Conference facilities",
+        "Outdoor activities",
+        "Catering options",
+        "AV equipment support",
+        "Accommodation available",
+        "Team activity planning",
+        "Flexible scheduling"
+      ],
+      "moreInfo": "Up to 200 participants"
+    },
+    {
+      "title": "Photoshoots & Filming",
+      "subtitle": "Your Creative Canvas",
+      "slogan": "Capture stunning visuals against our diverse natural backdrops. From golden hour portraits to professional video productions, our gardens offer endless creative possibilities.",
+      "icon": "",
+      "description": "Our sprawling gardens offer a variety of natural backdrops - from lush green lawns to flowering gardens and rustic pathways. Whatever your creative vision, we provide the perfect setting.",
+      "itinerary": [
+        "Diverse backdrops",
+        "Natural lighting",
+        "Flexible hours",
+        "Vehicle access for equipment",
+        "Multiple scenic locations",
+        "Golden hour lighting"
+      ],
+      "moreInfo": "All production sizes"
+    }
+  ]
+}
