@@ -138,7 +138,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:info@greentulipgardens.co.ke"
+                  href={`mailto:${company.contact.email}`}
                   className="flex items-center gap-3 text-cream/80 hover:text-gold transition-colors text-sm"
                 >
                   <Mail className="h-5 w-5 text-gold shrink-0" />
@@ -169,7 +169,12 @@ export function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-cream/60 text-sm">
               Developed & Maintained by{" "}
-              <a className="underline text-secondary" href={developer.contact.email}>{developer.lastName}</a>
+              <a
+                className="underline text-secondary"
+                href={developer.contact.email}
+              >
+                {developer.lastName}
+              </a>
             </p>
 
             <p className="text-cream/60 text-sm">

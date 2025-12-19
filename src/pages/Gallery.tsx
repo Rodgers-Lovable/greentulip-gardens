@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
-import heroImage from '@/assets/hero-home.jpg';
+import heroImage from "@/assets/images/image_1.jpg";
 
 const categories = [
   'All',

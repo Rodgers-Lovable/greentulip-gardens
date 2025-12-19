@@ -5,7 +5,7 @@ import { ChevronDown } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import heroImage from '@/assets/hero-home.jpg';
+import heroImage from "@/assets/images/image_1.jpg";
 
 const faqCategories = [
   {

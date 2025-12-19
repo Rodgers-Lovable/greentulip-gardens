@@ -1,31 +1,37 @@
-import { motion } from 'framer-motion';
-import { MapPin, Car, Clock, Phone } from 'lucide-react';
-import { Layout } from '@/components/layout/Layout';
-import { Button } from '@/components/ui/button';
-import heroImage from '@/assets/hero-home.jpg';
+import { motion } from "framer-motion";
+import { MapPin, Car, Clock, Phone } from "lucide-react";
+import { Layout } from "@/components/layout/Layout";
+import { Button } from "@/components/ui/button";
+import heroImage from "@/assets/images/image_1.jpg";
+import companyData from "@/data/company.json";
 
 const directions = [
   {
-    from: 'Meru Town',
-    distance: '15 km',
-    time: '20 minutes',
-    description: 'Head south on the Meru-Nanyuki Highway. Take the Nkubu turn-off and follow signs to GreenTulip Gardens.',
+    from: "Meru Town",
+    distance: "15 km",
+    time: "20 minutes",
+    description:
+      "Head south on the Meru-Nanyuki Highway. Take the Nkubu turn-off and follow signs to GreenTulip Gardens.",
   },
   {
-    from: 'Nairobi',
-    distance: '230 km',
-    time: '4 hours',
-    description: 'Take the A2 Highway through Thika and Embu. Continue to Meru Town, then proceed to Nkubu.',
+    from: "Nairobi",
+    distance: "230 km",
+    time: "4 hours",
+    description:
+      "Take the A2 Highway through Thika and Embu. Continue to Meru Town, then proceed to Nkubu.",
   },
   {
-    from: 'Nanyuki',
-    distance: '50 km',
-    time: '1 hour',
-    description: 'Drive east on the Nanyuki-Meru Road through the scenic Mount Kenya region to Nkubu.',
+    from: "Nanyuki",
+    distance: "50 km",
+    time: "1 hour",
+    description:
+      "Drive east on the Nanyuki-Meru Road through the scenic Mount Kenya region to Nkubu.",
   },
 ];
 
 export default function Location() {
+  const { company } = companyData;
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -49,7 +55,7 @@ export default function Location() {
               Location & Directions
             </h1>
             <p className="text-cream/90 text-lg max-w-2xl mx-auto">
-              Conveniently located in Nkubu, Meru County, our gardens are easily 
+              Conveniently located in Nkubu, Meru County, our gardens are easily
               accessible from major towns in the region
             </p>
           </motion.div>
@@ -73,9 +79,13 @@ export default function Location() {
                   <MapPin className="h-6 w-6 text-forest" />
                 </div>
                 <div>
-                  <p className="text-lg text-forest font-medium">GreenTulip Gardens</p>
+                  <p className="text-lg text-forest font-medium">
+                    {company.name}
+                  </p>
                   <p className="text-muted-foreground">Nkubu, Meru County</p>
-                  <p className="text-muted-foreground">Kenya</p>
+                  <p className="text-muted-foreground">
+                    {company.address.country}
+                  </p>
                 </div>
               </div>
 
@@ -86,7 +96,9 @@ export default function Location() {
                   </div>
                   <div>
                     <p className="text-forest font-medium">Ample Parking</p>
-                    <p className="text-muted-foreground text-sm">Free parking for all guests</p>
+                    <p className="text-muted-foreground text-sm">
+                      Free parking for all guests
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
@@ -95,18 +107,41 @@ export default function Location() {
                   </div>
                   <div>
                     <p className="text-forest font-medium">Operating Hours</p>
-                    <p className="text-muted-foreground text-sm">Mon - Sun: 8:00 AM - 6:00 PM</p>
+                    <p className="text-muted-foreground text-sm">
+                      Weekdays: 7:00 AM - 10:00 PM
+                    </p>
+                    <p className="text-muted-foreground text-sm">
+                      Weekend: 7:00 AM - 10:00 PM
+                    </p>
+                    <p className="text-muted-foreground text-sm">
+                      Holidays: 7:00 AM - 10:00 PM
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-forest/10 rounded-xl flex items-center justify-center">
                     <Phone className="h-6 w-6 text-forest" />
                   </div>
+
                   <div>
-                    <p className="text-forest font-medium">Need Help Finding Us?</p>
-                    <a href="tel:+254700000000" className="text-gold text-sm hover:underline">
-                      Call +254 700 000 000
-                    </a>
+                    <p className="text-forest font-medium">
+                      Need Help Finding Us?
+                    </p>
+                    <div className="flex">
+                      <a
+                        href={`tel:${company.contact.phone}`}
+                        className="text-gold text-sm hover:underline"
+                      >
+                        Call {company.contact.phone}
+                      </a>
+                      <p>{", "}</p>
+                      <a
+                        href={`tel:${company.contact.phone}`}
+                        className="text-gold text-sm hover:underline"
+                      >
+                        Call {company.contact.phone1}
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -114,7 +149,7 @@ export default function Location() {
               <div className="mt-8 flex gap-4">
                 <Button variant="gold" asChild>
                   <a
-                    href="https://www.google.com/maps/dir/?api=1&destination=-0.0756,37.5969"
+                    href={company.address.location}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -131,14 +166,14 @@ export default function Location() {
               className="rounded-2xl overflow-hidden shadow-large"
             >
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127672.25647785982!2d37.5969!3d-0.0756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x18287c9c95c42c65%3A0x8fd4b7e65bbae96c!2sNkubu!5e0!3m2!1sen!2ske!4v1702500000000!5m2!1sen!2ske"
-                className="w-full h-full min-h-[400px]"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.816866666446!2d37.63956147547471!3d-0.04890969995060542!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x18278ba0abdd1051%3A0x3b481d7a43899438!2sThe%20GreenTulip%20Gardens!5e0!3m2!1sen!2ske!4v1766129578159!5m2!1sen!2ske"
+                className="w-full h-full rounded-2xl"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title="GreenTulip Gardens Location"
-              />
+              ></iframe>
             </motion.div>
           </div>
         </div>
@@ -184,7 +219,9 @@ export default function Location() {
                     <p className="text-gold font-semibold">{route.time}</p>
                   </div>
                 </div>
-                <p className="text-muted-foreground text-sm">{route.description}</p>
+                <p className="text-muted-foreground text-sm">
+                  {route.description}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -204,10 +241,10 @@ export default function Location() {
             </h2>
             <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
               {[
-                'Free Parking',
-                'Wheelchair Accessible',
-                'Restroom Facilities',
-                'Security On-Site',
+                "Free Parking",
+                "Wheelchair Accessible",
+                "Restroom Facilities",
+                "Security On-Site",
               ].map((amenity) => (
                 <div
                   key={amenity}

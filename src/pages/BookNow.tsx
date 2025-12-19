@@ -1,52 +1,55 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Phone, Mail, Clock, MapPin, MessageCircle } from 'lucide-react';
-import { Layout } from '@/components/layout/Layout';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Phone, Mail, Clock, MapPin, MessageCircle } from "lucide-react";
+import { Layout } from "@/components/layout/Layout";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import companyData from "@/data/company.json";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { useToast } from '@/hooks/use-toast';
-import heroImage from '@/assets/hero-home.jpg';
+} from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
+import heroImage from "@/assets/images/image_1.jpg";
 
 const eventTypes = [
-  'Wedding & Ceremony',
-  'Picnic & Day Out',
-  'Accommodation',
-  'Team Building & Retreat',
-  'Photoshoot & Filming',
-  'Other',
+  "Wedding & Ceremony",
+  "Picnic & Day Out",
+  "Accommodation",
+  "Team Building & Retreat",
+  "Photoshoot & Filming",
+  "Other",
 ];
 
 const budgetRanges = [
-  'Below KSh 50,000',
-  'KSh 50,000 - 100,000',
-  'KSh 100,000 - 250,000',
-  'KSh 250,000 - 500,000',
-  'Above KSh 500,000',
-  'Flexible / Not Sure',
+  "Below KSh 50,000",
+  "KSh 50,000 - 100,000",
+  "KSh 100,000 - 250,000",
+  "KSh 250,000 - 500,000",
+  "Above KSh 500,000",
+  "Flexible / Not Sure",
 ];
 
 export default function BookNow() {
+  const { company } = companyData;
+
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    fullName: '',
-    phone: '',
-    email: '',
-    eventType: '',
-    preferredDate: '',
-    alternativeDate: '',
-    guests: '',
-    budget: '',
-    message: '',
+    fullName: "",
+    phone: "",
+    email: "",
+    eventType: "",
+    preferredDate: "",
+    alternativeDate: "",
+    guests: "",
+    budget: "",
+    message: "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -57,21 +60,22 @@ export default function BookNow() {
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
     toast({
-      title: 'Booking Enquiry Submitted!',
-      description: 'Our team will contact you within 24 hours to discuss your event.',
+      title: "Booking Enquiry Submitted!",
+      description:
+        "Our team will contact you within 24 hours to discuss your event.",
     });
 
     setIsSubmitting(false);
     setFormData({
-      fullName: '',
-      phone: '',
-      email: '',
-      eventType: '',
-      preferredDate: '',
-      alternativeDate: '',
-      guests: '',
-      budget: '',
-      message: '',
+      fullName: "",
+      phone: "",
+      email: "",
+      eventType: "",
+      preferredDate: "",
+      alternativeDate: "",
+      guests: "",
+      budget: "",
+      message: "",
     });
   };
 
@@ -98,8 +102,8 @@ export default function BookNow() {
               Book With Us
             </h1>
             <p className="text-cream/90 text-lg max-w-2xl mx-auto">
-              Ready to create unforgettable memories? Complete the form below and our 
-              team will get back to you within 24 hours.
+              Ready to create unforgettable memories? Complete the form below
+              and our team will get back to you within 24 hours.
             </p>
           </motion.div>
         </div>
@@ -128,7 +132,10 @@ export default function BookNow() {
                   {/* Personal Details */}
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="fullName" className="text-forest font-medium">
+                      <Label
+                        htmlFor="fullName"
+                        className="text-forest font-medium"
+                      >
                         Full Name <span className="text-gold">*</span>
                       </Label>
                       <Input
@@ -142,14 +149,16 @@ export default function BookNow() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="phone" className="text-forest font-medium">
+                      <Label
+                        htmlFor="phone"
+                        className="text-forest font-medium"
+                      >
                         Phone Number <span className="text-gold">*</span>
                       </Label>
                       <Input
                         id="phone"
                         type="tel"
                         required
-                        placeholder="+254 700 000 000"
                         value={formData.phone}
                         onChange={(e) =>
                           setFormData({ ...formData, phone: e.target.value })
@@ -176,7 +185,10 @@ export default function BookNow() {
 
                   {/* Event Details */}
                   <div className="space-y-2">
-                    <Label htmlFor="eventType" className="text-forest font-medium">
+                    <Label
+                      htmlFor="eventType"
+                      className="text-forest font-medium"
+                    >
                       Event Type <span className="text-gold">*</span>
                     </Label>
                     <Select
@@ -200,7 +212,10 @@ export default function BookNow() {
 
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="preferredDate" className="text-forest font-medium">
+                      <Label
+                        htmlFor="preferredDate"
+                        className="text-forest font-medium"
+                      >
                         Preferred Date <span className="text-gold">*</span>
                       </Label>
                       <Input
@@ -209,12 +224,18 @@ export default function BookNow() {
                         required
                         value={formData.preferredDate}
                         onChange={(e) =>
-                          setFormData({ ...formData, preferredDate: e.target.value })
+                          setFormData({
+                            ...formData,
+                            preferredDate: e.target.value,
+                          })
                         }
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="alternativeDate" className="text-forest font-medium">
+                      <Label
+                        htmlFor="alternativeDate"
+                        className="text-forest font-medium"
+                      >
                         Alternative Date
                       </Label>
                       <Input
@@ -222,7 +243,10 @@ export default function BookNow() {
                         type="date"
                         value={formData.alternativeDate}
                         onChange={(e) =>
-                          setFormData({ ...formData, alternativeDate: e.target.value })
+                          setFormData({
+                            ...formData,
+                            alternativeDate: e.target.value,
+                          })
                         }
                       />
                     </div>
@@ -230,14 +254,16 @@ export default function BookNow() {
 
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="guests" className="text-forest font-medium">
+                      <Label
+                        htmlFor="guests"
+                        className="text-forest font-medium"
+                      >
                         Estimated Guests <span className="text-gold">*</span>
                       </Label>
                       <Input
                         id="guests"
                         type="number"
                         required
-                        placeholder="50"
                         min="1"
                         value={formData.guests}
                         onChange={(e) =>
@@ -246,8 +272,14 @@ export default function BookNow() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="budget" className="text-forest font-medium">
-                        Budget Range <span className="text-muted-foreground text-sm">(optional)</span>
+                      <Label
+                        htmlFor="budget"
+                        className="text-forest font-medium"
+                      >
+                        Budget Range{" "}
+                        <span className="text-muted-foreground text-sm">
+                          (optional)
+                        </span>
                       </Label>
                       <Select
                         value={formData.budget}
@@ -270,7 +302,10 @@ export default function BookNow() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="message" className="text-forest font-medium">
+                    <Label
+                      htmlFor="message"
+                      className="text-forest font-medium"
+                    >
                       Message / Special Requests
                     </Label>
                     <Textarea
@@ -291,7 +326,7 @@ export default function BookNow() {
                     className="w-full"
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? 'Submitting...' : 'Submit Booking Enquiry'}
+                    {isSubmitting ? "Submitting..." : "Submit Booking Enquiry"}
                   </Button>
                 </form>
               </div>
@@ -309,23 +344,29 @@ export default function BookNow() {
               <div className="bg-forest rounded-2xl p-8 text-cream">
                 <h3 className="font-heading text-xl mb-6">Quick Contact</h3>
                 <ul className="space-y-5">
-                  <li>
-                    <a
-                      href="tel:+254700000000"
-                      className="flex items-center gap-4 hover:text-gold transition-colors"
-                    >
-                      <div className="w-10 h-10 bg-cream/10 rounded-full flex items-center justify-center">
-                        <Phone className="h-5 w-5" />
-                      </div>
-                      <div>
-                        <p className="text-cream/70 text-sm">Call Us</p>
-                        <p className="font-medium">+254 700 000 000</p>
-                      </div>
-                    </a>
+                  <li className="flex items-center gap-4">
+                    <div className="w-10 h-10 bg-cream/10 rounded-full flex items-center justify-center">
+                      <Phone className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className="text-cream/70 text-sm">Call Us</p>
+                      <a
+                        href={`tel:${company.contact.phone}`}
+                        className="hover:text-gold transition-colors"
+                      >
+                        <p className="font-medium">{company.contact.phone}</p>
+                      </a>
+                      <a
+                        href={`tel:${company.contact.phone}`}
+                        className="hover:text-gold transition-colors"
+                      >
+                        <p className="font-medium">{company.contact.phone}</p>
+                      </a>
+                    </div>
                   </li>
                   <li>
                     <a
-                      href="https://wa.me/254700000000"
+                      href={`tel:${company.contact.phone}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-4 hover:text-gold transition-colors"
@@ -335,13 +376,13 @@ export default function BookNow() {
                       </div>
                       <div>
                         <p className="text-cream/70 text-sm">WhatsApp</p>
-                        <p className="font-medium">+254 700 000 000</p>
+                        <p className="font-medium">{company.contact.phone}</p>
                       </div>
                     </a>
                   </li>
                   <li>
                     <a
-                      href="mailto:info@greentulipgardens.co.ke"
+                      href={`mailto:${company.contact.email}`}
                       className="flex items-center gap-4 hover:text-gold transition-colors"
                     >
                       <div className="w-10 h-10 bg-cream/10 rounded-full flex items-center justify-center">
@@ -349,7 +390,9 @@ export default function BookNow() {
                       </div>
                       <div>
                         <p className="text-cream/70 text-sm">Email</p>
-                        <p className="font-medium text-sm">info@greentulipgardens.co.ke</p>
+                        <p className="font-medium text-sm">
+                          info@greentulip.co.ke
+                        </p>
                       </div>
                     </a>
                   </li>
@@ -360,16 +403,35 @@ export default function BookNow() {
               <div className="bg-secondary rounded-2xl p-8">
                 <div className="flex items-center gap-3 mb-6">
                   <Clock className="h-5 w-5 text-gold" />
-                  <h3 className="font-heading text-xl text-forest">Operating Hours</h3>
+                  <h3 className="font-heading text-xl text-forest">
+                    Operating Hours
+                  </h3>
                 </div>
                 <ul className="space-y-3 text-sm">
                   <li className="flex justify-between">
-                    <span className="text-muted-foreground">Monday - Sunday</span>
-                    <span className="text-forest font-medium">8:00 AM - 6:00 PM</span>
+                    <span className="text-muted-foreground">Weekdays</span>
+                    <span className="text-forest font-medium">
+                      7:00 AM - 10:00 PM
+                    </span>
                   </li>
                   <li className="flex justify-between">
+                    <span className="text-muted-foreground">Weekends</span>
+                    <span className="text-forest font-medium">
+                      7:00 AM - 10:00 PM
+                    </span>
+                  </li>
+                  <li className="flex justify-between">
+                    <span className="text-muted-foreground">Holidays</span>
+                    <span className="text-forest font-medium">
+                      7:00 AM - 10:00 PM
+                    </span>
+                  </li>
+                  <br />
+                  <li className="flex justify-between">
                     <span className="text-muted-foreground">Events</span>
-                    <span className="text-forest font-medium">By Appointment</span>
+                    <span className="text-forest font-medium">
+                      By Appointment
+                    </span>
                   </li>
                 </ul>
               </div>
@@ -381,19 +443,22 @@ export default function BookNow() {
                   <h3 className="font-heading text-xl text-forest">Location</h3>
                 </div>
                 <p className="text-muted-foreground text-sm mb-4">
-                  GreenTulip Gardens<br />
-                  Nkubu, Meru County<br />
-                  Kenya
+                  {company.name}
+                  <br />
+                  {company.address.town}, {company.address.city}
+                  <br />
+                  {company.address.country}
                 </p>
                 <Button variant="forest-outline" size="sm" asChild>
-                  <a href="/location">Get Directions</a>
+                  <a href={company.address.location} target="_blank">Get Directions</a>
                 </Button>
               </div>
 
               {/* Response Time */}
               <div className="bg-gold/10 border border-gold/30 rounded-2xl p-6 text-center">
                 <p className="text-forest font-medium">
-                  We typically respond to enquiries within <span className="text-gold font-semibold">24 hours</span>
+                  We typically respond to enquiries within{" "}
+                  <span className="text-gold font-semibold">24 hours</span>
                 </p>
               </div>
             </motion.div>
