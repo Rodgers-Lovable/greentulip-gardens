@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { QuoteModal } from "@/components/QuoteModal";
 import heroImage from "@/assets/images/grounds.jpeg";
 import hero1Image from "@/assets/images/image_1.jpg";
+import companyData from "@/data/company.json";
 
 const experiences = [
   {
@@ -75,6 +76,8 @@ const testimonials = [
 ];
 
 export default function Index() {
+  const { company } = companyData;
+
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
   return (
@@ -319,9 +322,10 @@ export default function Index() {
                 well-connected to main roads.
               </p>
               <Button variant="gold" size="lg" asChild>
-                <Link to="/location">Get Directions</Link>
+                <Link to={company.address.location}>Get Directions</Link>
               </Button>
             </motion.div>
+            
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
