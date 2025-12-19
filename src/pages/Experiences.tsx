@@ -12,7 +12,10 @@ import {
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { QuoteModal } from "@/components/QuoteModal";
-import heroImage from "@/assets/hero-home.jpg";
+import heroImage from "@/assets/images/image_1.jpg";
+import weddingImage from "@/assets/images/image_1.jpg";
+import pickinImage from "@/assets/images/image_1.jpg";
+import roomImage from "@/assets/images/room.jpeg";
 import experiencesData from "@/data/experiences.json";
 
 export default function Experiences() {

@@ -45,7 +45,7 @@ export function Footer() {
             </p>
             <div className="flex gap-4">
               <a
-                href="https://facebook.com"
+                href={company.social.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-cream/10 rounded-full hover:bg-gold hover:text-forest-dark transition-colors"
@@ -54,7 +54,7 @@ export function Footer() {
                 <Facebook className="h-5 w-5" />
               </a>
               <a
-                href="https://instagram.com"
+                href={company.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-cream/10 rounded-full hover:bg-gold hover:text-forest-dark transition-colors"

@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
 import { Leaf, Award, Heart, Users } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
-import heroImage from '@/assets/hero-home.jpg';
+import heroImage from '@/assets/images/image_1.jpg';
+import hero1Image from '@/assets/images/image_6.jpg';
 
 const values = [
   {
@@ -96,7 +97,7 @@ export default function About() {
               className="bg-forest/10 rounded-2xl aspect-[4/3] overflow-hidden"
             >
               <img
-                src={heroImage}
+                src={hero1Image}
                 alt="GreenTulip Gardens"
                 className="w-full h-full object-cover"
               />
