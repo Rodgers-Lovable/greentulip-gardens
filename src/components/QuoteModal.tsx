@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
+import { initializeEmailJS, sendQuoteRequest, type QuoteRequestData } from "@/services/emailService";
 
 interface QuoteModalProps {
   isOpen: boolean;
@@ -42,29 +43,63 @@ export function QuoteModal({ isOpen, onClose, eventType }: QuoteModalProps) {
     message: "",
   });
 
+  // Initialize EmailJS when component mounts
+  useEffect(() => {
+    initializeEmailJS();
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      // Send email using EmailJS
+      const emailData: QuoteRequestData = {
+        fullName: formData.fullName,
+        phone: formData.phone,
+        email: formData.email,
+        eventType: formData.eventType,
+        preferredDate: formData.preferredDate,
+        guests: formData.guests,
+        message: formData.message,
+      };
 
-    toast({
-      title: "Quote Request Sent!",
-      description: "We'll get back to you within 24 hours.",
-    });
+      const success = await sendQuoteRequest(emailData);
 
-    setIsSubmitting(false);
-    setFormData({
-      fullName: "",
-      phone: "",
-      email: "",
-      eventType: eventType || "",
-      preferredDate: "",
-      guests: "",
-      message: "",
-    });
-    onClose();
+      if (success) {
+        toast({
+          title: "Quote Request Sent!",
+          description: "We'll get back to you within 24 hours.",
+        });
+
+        // Reset form
+        setFormData({
+          fullName: "",
+          phone: "",
+          email: "",
+          eventType: eventType || "",
+          preferredDate: "",
+          guests: "",
+          message: "",
+        });
+        onClose();
+      } else {
+        toast({
+          title: "Error Sending Quote Request",
+          description: "Please try again or contact us directly.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Quote submission error:', error);
+      toast({
+        title: "Error Sending Quote Request",
+        description: "Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (!isOpen) return null;

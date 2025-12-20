@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Phone, Mail, Clock, MapPin, MessageCircle } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import heroImage from "@/assets/images/image_1.jpg";
+import { initializeEmailJS, sendBookingEnquiry, type BookingEnquiryData } from "@/services/emailService";
 
 const eventTypes = [
   "Wedding & Ceremony",
@@ -53,31 +54,67 @@ export default function BookNow() {
     message: "",
   });
 
+  // Initialize EmailJS when component mounts
+  useEffect(() => {
+    initializeEmailJS();
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      // Send email using EmailJS
+      const emailData: BookingEnquiryData = {
+        fullName: formData.fullName,
+        phone: formData.phone,
+        email: formData.email,
+        eventType: formData.eventType,
+        preferredDate: formData.preferredDate,
+        alternativeDate: formData.alternativeDate,
+        guests: formData.guests,
+        budget: formData.budget,
+        message: formData.message,
+      };
 
-    toast({
-      title: "Booking Enquiry Submitted!",
-      description:
-        "Our team will contact you within 24 hours to discuss your event.",
-    });
+      const success = await sendBookingEnquiry(emailData);
 
-    setIsSubmitting(false);
-    setFormData({
-      fullName: "",
-      phone: "",
-      email: "",
-      eventType: "",
-      preferredDate: "",
-      alternativeDate: "",
-      guests: "",
-      budget: "",
-      message: "",
-    });
+      if (success) {
+        toast({
+          title: "Booking Enquiry Submitted!",
+          description:
+            "Our team will contact you within 24 hours to discuss your event.",
+        });
+
+        // Reset form
+        setFormData({
+          fullName: "",
+          phone: "",
+          email: "",
+          eventType: "",
+          preferredDate: "",
+          alternativeDate: "",
+          guests: "",
+          budget: "",
+          message: "",
+        });
+      } else {
+        toast({
+          title: "Error Submitting Enquiry",
+          description: "Please try again or contact us directly.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Booking submission error:', error);
+      toast({
+        title: "Error Submitting Enquiry",
+        description: "Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
