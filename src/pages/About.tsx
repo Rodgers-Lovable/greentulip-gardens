@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Leaf, Award, Heart, Users } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
+import SEOHead from '@/components/SEOHead';
 import heroImage from '@/assets/images/image_1.jpg';
 import hero1Image from '@/assets/images/image_6.jpg';
 
@@ -30,6 +31,12 @@ const values = [
 export default function About() {
   return (
     <Layout>
+      <SEOHead
+        title="About Us - Our Story & Values"
+        description="Learn about GreenTulip Gardens' mission to provide exceptional garden venue experiences in Meru, Kenya. Discover our values of nature preservation, heartfelt service, and community focus."
+        keywords="about GreenTulip Gardens, garden venue story, Meru Kenya venue, nature preservation, venue values, community focused venue"
+        url="https://greentulip.co.ke/about"
+      />
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center">
         <div
