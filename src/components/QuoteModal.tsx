@@ -14,6 +14,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { initializeEmailJS, sendQuoteRequest, type QuoteRequestData } from "@/services/emailService";
+import { umami } from "@/config/umami";
 
 interface QuoteModalProps {
   isOpen: boolean;
@@ -48,9 +49,19 @@ export function QuoteModal({ isOpen, onClose, eventType }: QuoteModalProps) {
     initializeEmailJS();
   }, []);
 
+  // Track modal open
+  useEffect(() => {
+    if (isOpen) {
+      umami.trackQuoteModalOpen(eventType);
+    }
+  }, [isOpen, eventType]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    // Track form submission attempt
+    umami.trackQuoteSubmission(formData.eventType, parseInt(formData.guests) || 0);
 
     try {
       // Send email using EmailJS
@@ -67,6 +78,9 @@ export function QuoteModal({ isOpen, onClose, eventType }: QuoteModalProps) {
       const success = await sendQuoteRequest(emailData);
 
       if (success) {
+        // Track successful quote submission
+        umami.trackQuoteSuccess(formData.eventType);
+
         toast({
           title: "Quote Request Sent!",
           description: "We'll get back to you within 24 hours.",
@@ -84,6 +98,12 @@ export function QuoteModal({ isOpen, onClose, eventType }: QuoteModalProps) {
         });
         onClose();
       } else {
+        // Track failed quote submission
+        umami.trackEvent('quote-form-error', {
+          event_type: formData.eventType,
+          error_type: 'email_send_failed'
+        });
+
         toast({
           title: "Error Sending Quote Request",
           description: "Please try again or contact us directly.",
@@ -92,6 +112,13 @@ export function QuoteModal({ isOpen, onClose, eventType }: QuoteModalProps) {
       }
     } catch (error) {
       console.error('Quote submission error:', error);
+
+      // Track error
+      umami.trackEvent('quote-form-error', {
+        event_type: formData.eventType,
+        error_type: 'exception'
+      });
+
       toast({
         title: "Error Sending Quote Request",
         description: "Please try again or contact us directly.",

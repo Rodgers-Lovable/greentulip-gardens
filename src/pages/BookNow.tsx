@@ -18,6 +18,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import heroImage from "@/assets/images/image_1.jpg";
 import { initializeEmailJS, sendBookingEnquiry, type BookingEnquiryData } from "@/services/emailService";
+import { umami } from "@/config/umami";
 
 const eventTypes = [
   "Wedding & Ceremony",
@@ -57,11 +58,21 @@ export default function BookNow() {
   // Initialize EmailJS when component mounts
   useEffect(() => {
     initializeEmailJS();
+
+    // Track page view for booking page
+    umami.trackEvent('booking-page-view');
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    // Track form submission attempt
+    umami.trackBookingSubmission(
+      formData.eventType,
+      parseInt(formData.guests) || 0,
+      formData.budget
+    );
 
     try {
       // Send email using EmailJS
@@ -80,6 +91,9 @@ export default function BookNow() {
       const success = await sendBookingEnquiry(emailData);
 
       if (success) {
+        // Track successful booking submission
+        umami.trackBookingSuccess(formData.eventType);
+
         toast({
           title: "Booking Enquiry Submitted!",
           description:
@@ -99,6 +113,12 @@ export default function BookNow() {
           message: "",
         });
       } else {
+        // Track failed booking submission
+        umami.trackEvent('booking-form-error', {
+          event_type: formData.eventType,
+          error_type: 'email_send_failed'
+        });
+
         toast({
           title: "Error Submitting Enquiry",
           description: "Please try again or contact us directly.",
@@ -107,6 +127,13 @@ export default function BookNow() {
       }
     } catch (error) {
       console.error('Booking submission error:', error);
+
+      // Track error
+      umami.trackEvent('booking-form-error', {
+        event_type: formData.eventType,
+        error_type: 'exception'
+      });
+
       toast({
         title: "Error Submitting Enquiry",
         description: "Please try again or contact us directly.",
@@ -397,12 +424,7 @@ export default function BookNow() {
                       <a
                         href={`tel:${company.contact.phone}`}
                         className="hover:text-gold transition-colors"
-                      >
-                        <p className="font-medium">{company.contact.phone}</p>
-                      </a>
-                      <a
-                        href={`tel:${company.contact.phone}`}
-                        className="hover:text-gold transition-colors"
+                        onClick={() => umami.trackContactInteraction('phone')}
                       >
                         <p className="font-medium">{company.contact.phone}</p>
                       </a>
@@ -410,10 +432,11 @@ export default function BookNow() {
                   </li>
                   <li>
                     <a
-                      href={`tel:${company.contact.phone}`}
+                      href={`https://wa.me/${company.contact.phone.replace(/\D/g, '')}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-4 hover:text-gold transition-colors"
+                      onClick={() => umami.trackContactInteraction('whatsapp')}
                     >
                       <div className="w-10 h-10 bg-cream/10 rounded-full flex items-center justify-center">
                         <MessageCircle className="h-5 w-5" />
@@ -428,6 +451,7 @@ export default function BookNow() {
                     <a
                       href={`mailto:${company.contact.email}`}
                       className="flex items-center gap-4 hover:text-gold transition-colors"
+                      onClick={() => umami.trackContactInteraction('email')}
                     >
                       <div className="w-10 h-10 bg-cream/10 rounded-full flex items-center justify-center">
                         <Mail className="h-5 w-5" />
@@ -494,7 +518,13 @@ export default function BookNow() {
                   {company.address.country}
                 </p>
                 <Button variant="forest-outline" size="sm" asChild>
-                  <a href={company.address.location} target="_blank">Get Directions</a>
+                  <a
+                    href={company.address.location}
+                    target="_blank"
+                    onClick={() => umami.trackContactInteraction('directions')}
+                  >
+                    Get Directions
+                  </a>
                 </Button>
               </div>
 
