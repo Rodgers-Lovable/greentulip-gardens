@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Phone, Mail, Clock, MapPin, MessageCircle } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
+import SEOHead from "@/components/SEOHead";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -81,6 +82,12 @@ export default function BookNow() {
 
   return (
     <Layout>
+      <SEOHead
+        title="Book Now - Reserve Your Event at GreenTulip Gardens"
+        description="Book your wedding, event, or accommodation at GreenTulip Gardens. Contact us to reserve your date and plan your perfect celebration in Meru, Kenya."
+        keywords="book venue Meru, reserve wedding venue Kenya, event booking Nkubu, contact GreenTulip Gardens, venue reservation"
+        url="https://greentulip.co.ke/book"
+      />
       {/* Hero Section */}
       <section className="relative min-h-[50vh] flex items-center justify-center">
         <div

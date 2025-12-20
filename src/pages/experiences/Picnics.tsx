@@ -6,6 +6,7 @@ import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { QuoteModal } from '@/components/QuoteModal';
 import { cn } from '@/lib/utils';
+import SEOHead from '@/components/SEOHead';
 import heroImage from '@/assets/hero-home.jpg';
 
 const features = [
@@ -58,6 +59,12 @@ export default function Picnics() {
 
   return (
     <Layout>
+      <SEOHead
+        title="Picnics & Day Outs - Family Fun at GreenTulip Gardens"
+        description="Enjoy perfect picnics and family day outs at GreenTulip Gardens, Meru. Scenic spots, children's play areas, and nature walks in beautiful garden settings."
+        keywords="picnic venue Meru, family day out Kenya, children play area, garden picnic, scenic spots Nkubu, nature walks"
+        url="https://greentulip.co.ke/experiences/picnics"
+      />
       <section className="relative min-h-[70vh] flex items-center justify-center">
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroImage})` }}>
           <div className="absolute inset-0 bg-forest-dark/70" />

@@ -1,12 +1,20 @@
 import { Layout } from "@/components/layout/Layout";
 import { motion } from "framer-motion";
 import companyData from "@/data/company.json";
+import SEOHead from "@/components/SEOHead";
 
 export default function Terms() {
   const { company } = companyData;
 
   return (
     <Layout>
+      <SEOHead
+        title="Terms & Conditions - Booking Terms at GreenTulip Gardens"
+        description="Review our terms and conditions for booking events, accommodation, and services at GreenTulip Gardens venue in Meru, Kenya."
+        keywords="terms conditions, booking terms, GreenTulip Gardens terms, venue policies, event booking conditions"
+        url="https://greentulip.co.ke/terms"
+        noIndex={true}
+      />
       <div className="pt-28 pb-16 bg-cream">
         <div className="container mx-auto px-4 md:px-8 max-w-4xl">
           <motion.div

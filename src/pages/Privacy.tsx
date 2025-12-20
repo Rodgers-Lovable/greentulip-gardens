@@ -1,12 +1,20 @@
 import { Layout } from "@/components/layout/Layout";
 import { motion } from "framer-motion";
 import companyData from "@/data/company.json";
+import SEOHead from "@/components/SEOHead";
 
 export default function Privacy() {
   const { company } = companyData;
 
   return (
     <Layout>
+      <SEOHead
+        title="Privacy Policy - Data Protection at GreenTulip Gardens"
+        description="Read our privacy policy to understand how GreenTulip Gardens protects your personal information and data when booking events or using our services."
+        keywords="privacy policy, data protection, GreenTulip Gardens privacy, personal information, booking privacy"
+        url="https://greentulip.co.ke/privacy"
+        noIndex={true}
+      />
       <div className="pt-28 pb-16 bg-cream">
         <div className="container mx-auto px-4 md:px-8 max-w-4xl">
           <motion.div

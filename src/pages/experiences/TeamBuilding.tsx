@@ -6,6 +6,7 @@ import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { QuoteModal } from '@/components/QuoteModal';
 import { cn } from '@/lib/utils';
+import SEOHead from '@/components/SEOHead';
 import heroImage from '@/assets/hero-home.jpg';
 
 const features = [
@@ -58,6 +59,12 @@ export default function TeamBuilding() {
 
   return (
     <Layout>
+      <SEOHead
+        title="Team Building - Corporate Retreats at GreenTulip Gardens"
+        description="Host successful team building events and corporate retreats at GreenTulip Gardens, Meru. Professional facilities in a peaceful natural setting."
+        keywords="team building Meru, corporate retreat Kenya, business events Nkubu, team activities, corporate accommodation"
+        url="https://greentulip.co.ke/experiences/team-building"
+      />
       <section className="relative min-h-[70vh] flex items-center justify-center">
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroImage})` }}>
           <div className="absolute inset-0 bg-forest-dark/70" />

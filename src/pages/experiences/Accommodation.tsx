@@ -6,6 +6,7 @@ import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { QuoteModal } from '@/components/QuoteModal';
 import { cn } from '@/lib/utils';
+import SEOHead from '@/components/SEOHead';
 import heroImage from '@/assets/hero-home.jpg';
 
 const features = [
@@ -58,6 +59,12 @@ export default function Accommodation() {
 
   return (
     <Layout>
+      <SEOHead
+        title="Accommodation - Comfortable Stays at GreenTulip Gardens"
+        description="Stay overnight at GreenTulip Gardens with comfortable accommodation options in Nkubu, Meru. Perfect for wedding parties, events, and peaceful retreats."
+        keywords="accommodation Meru, overnight stay Nkubu, wedding accommodation, retreat accommodation, garden lodge Kenya"
+        url="https://greentulip.co.ke/experiences/accommodation"
+      />
       <section className="relative min-h-[70vh] flex items-center justify-center">
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroImage})` }}>
           <div className="absolute inset-0 bg-forest-dark/70" />

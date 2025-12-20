@@ -12,6 +12,7 @@ import {
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { QuoteModal } from "@/components/QuoteModal";
+import SEOHead from "@/components/SEOHead";
 import heroImage from "@/assets/images/image_1.jpg";
 import weddingImage from "@/assets/images/image_1.jpg";
 import pickinImage from "@/assets/images/image_1.jpg";
@@ -25,6 +26,12 @@ export default function Experiences() {
 
   return (
     <Layout>
+      <SEOHead
+        title="Experiences - Weddings, Events & More"
+        description="Discover our range of experiences at GreenTulip Gardens: weddings, picnics, accommodation, team building, and photography sessions in Meru, Kenya."
+        keywords="wedding venue Meru, picnic events Kenya, accommodation Nkubu, team building activities, photography sessions, garden events"
+        url="https://greentulip.co.ke/experiences"
+      />
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center">
         <div

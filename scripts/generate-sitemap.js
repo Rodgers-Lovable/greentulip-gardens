@@ -1,129 +1,136 @@
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+import companyData from "@/data/company.json";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const { company } = companyData;
+
 // Base URL from company data
-const BASE_URL = 'https://greentulip.co.ke';
+const BASE_URL = company.contact.website;
 
 // Define your routes with their priorities and change frequencies
 const routes = [
   {
-    path: '/',
+    path: "/",
     priority: 1.0,
-    changefreq: 'weekly',
-    lastmod: new Date().toISOString().split('T')[0]
+    changefreq: "weekly",
+    lastmod: new Date().toISOString().split("T")[0],
   },
   {
-    path: '/about',
+    path: "/about",
     priority: 0.8,
-    changefreq: 'monthly',
-    lastmod: new Date().toISOString().split('T')[0]
+    changefreq: "monthly",
+    lastmod: new Date().toISOString().split("T")[0],
   },
   {
-    path: '/experiences',
+    path: "/experiences",
     priority: 0.9,
-    changefreq: 'weekly',
-    lastmod: new Date().toISOString().split('T')[0]
+    changefreq: "weekly",
+    lastmod: new Date().toISOString().split("T")[0],
   },
   {
-    path: '/experiences/weddings',
+    path: "/experiences/weddings",
     priority: 0.8,
-    changefreq: 'monthly',
-    lastmod: new Date().toISOString().split('T')[0]
+    changefreq: "monthly",
+    lastmod: new Date().toISOString().split("T")[0],
   },
   {
-    path: '/experiences/picnics',
+    path: "/experiences/picnics",
     priority: 0.8,
-    changefreq: 'monthly',
-    lastmod: new Date().toISOString().split('T')[0]
+    changefreq: "monthly",
+    lastmod: new Date().toISOString().split("T")[0],
   },
   {
-    path: '/experiences/accommodation',
+    path: "/experiences/accommodation",
     priority: 0.8,
-    changefreq: 'monthly',
-    lastmod: new Date().toISOString().split('T')[0]
+    changefreq: "monthly",
+    lastmod: new Date().toISOString().split("T")[0],
   },
   {
-    path: '/experiences/team-building',
+    path: "/experiences/team-building",
     priority: 0.8,
-    changefreq: 'monthly',
-    lastmod: new Date().toISOString().split('T')[0]
+    changefreq: "monthly",
+    lastmod: new Date().toISOString().split("T")[0],
   },
   {
-    path: '/experiences/photoshoots',
+    path: "/experiences/photoshoots",
     priority: 0.8,
-    changefreq: 'monthly',
-    lastmod: new Date().toISOString().split('T')[0]
+    changefreq: "monthly",
+    lastmod: new Date().toISOString().split("T")[0],
   },
   {
-    path: '/gallery',
+    path: "/gallery",
     priority: 0.7,
-    changefreq: 'weekly',
-    lastmod: new Date().toISOString().split('T')[0]
+    changefreq: "weekly",
+    lastmod: new Date().toISOString().split("T")[0],
   },
   {
-    path: '/book',
+    path: "/book",
     priority: 0.9,
-    changefreq: 'daily',
-    lastmod: new Date().toISOString().split('T')[0]
+    changefreq: "daily",
+    lastmod: new Date().toISOString().split("T")[0],
   },
   {
-    path: '/location',
+    path: "/location",
     priority: 0.6,
-    changefreq: 'yearly',
-    lastmod: new Date().toISOString().split('T')[0]
+    changefreq: "yearly",
+    lastmod: new Date().toISOString().split("T")[0],
   },
   {
-    path: '/faqs',
+    path: "/faqs",
     priority: 0.6,
-    changefreq: 'monthly',
-    lastmod: new Date().toISOString().split('T')[0]
+    changefreq: "monthly",
+    lastmod: new Date().toISOString().split("T")[0],
   },
   {
-    path: '/packages',
+    path: "/packages",
     priority: 0.8,
-    changefreq: 'weekly',
-    lastmod: new Date().toISOString().split('T')[0]
+    changefreq: "weekly",
+    lastmod: new Date().toISOString().split("T")[0],
   },
   {
-    path: '/privacy',
+    path: "/privacy",
     priority: 0.3,
-    changefreq: 'yearly',
-    lastmod: new Date().toISOString().split('T')[0]
+    changefreq: "yearly",
+    lastmod: new Date().toISOString().split("T")[0],
   },
   {
-    path: '/terms',
+    path: "/terms",
     priority: 0.3,
-    changefreq: 'yearly',
-    lastmod: new Date().toISOString().split('T')[0]
-  }
+    changefreq: "yearly",
+    lastmod: new Date().toISOString().split("T")[0],
+  },
 ];
 
 function generateSitemap() {
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${routes.map(route => `  <url>
+${routes
+  .map(
+    (route) => `  <url>
     <loc>${BASE_URL}${route.path}</loc>
     <lastmod>${route.lastmod}</lastmod>
     <changefreq>${route.changefreq}</changefreq>
     <priority>${route.priority}</priority>
-  </url>`).join('\n')}
+  </url>`
+  )
+  .join("\n")}
 </urlset>`;
 
-  const publicDir = path.join(__dirname, '..', 'public');
+  const publicDir = path.join(__dirname, "..", "public");
 
   // Create public directory if it doesn't exist
   if (!fs.existsSync(publicDir)) {
     fs.mkdirSync(publicDir, { recursive: true });
   }
 
-  const sitemapPath = path.join(publicDir, 'sitemap.xml');
+  const sitemapPath = path.join(publicDir, "sitemap.xml");
   fs.writeFileSync(sitemapPath, sitemap);
 
-  console.log('✅ Sitemap generated successfully at:', sitemapPath);
+  console.log("✅ Sitemap generated successfully at:", sitemapPath);
   console.log(`📄 Generated sitemap with ${routes.length} URLs`);
 
   return sitemap;
@@ -135,19 +142,19 @@ Allow: /
 
 Sitemap: ${BASE_URL}/sitemap.xml`;
 
-  const publicDir = path.join(__dirname, '..', 'public');
-  const robotsPath = path.join(publicDir, 'robots.txt');
+  const publicDir = path.join(__dirname, "..", "public");
+  const robotsPath = path.join(publicDir, "robots.txt");
 
   fs.writeFileSync(robotsPath, robots);
-  console.log('✅ robots.txt generated successfully at:', robotsPath);
+  console.log("✅ robots.txt generated successfully at:", robotsPath);
 }
 
 // Run the script
 try {
   generateSitemap();
   generateRobotsTxt();
-  console.log('\n🚀 SEO files generated successfully!');
+  console.log("\n🚀 SEO files generated successfully!");
 } catch (error) {
-  console.error('❌ Error generating sitemap:', error);
+  console.error("❌ Error generating sitemap:", error);
   process.exit(1);
 }

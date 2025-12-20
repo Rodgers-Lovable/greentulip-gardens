@@ -6,6 +6,7 @@ import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { QuoteModal } from '@/components/QuoteModal';
 import { cn } from '@/lib/utils';
+import SEOHead from '@/components/SEOHead';
 import heroImage from '@/assets/hero-home.jpg';
 
 const features = [
@@ -65,6 +66,12 @@ export default function Weddings() {
 
   return (
     <Layout>
+      <SEOHead
+        title="Wedding Venue - Dream Weddings at GreenTulip Gardens"
+        description="Create your perfect wedding at GreenTulip Gardens in Meru, Kenya. Beautiful garden ceremony locations, reception areas, bridal suites, and professional coordination."
+        keywords="wedding venue Meru, garden wedding Kenya, outdoor ceremony, wedding reception Nkubu, bridal suite, dream wedding venue"
+        url="https://greentulip.co.ke/experiences/weddings"
+      />
       {/* Hero */}
       <section className="relative min-h-[70vh] flex items-center justify-center">
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroImage})` }}>

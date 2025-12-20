@@ -5,6 +5,7 @@ import { ChevronDown } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import SEOHead from '@/components/SEOHead';
 import heroImage from "@/assets/images/image_1.jpg";
 
 const faqCategories = [
@@ -110,6 +111,12 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 export default function FAQs() {
   return (
     <Layout>
+      <SEOHead
+        title="FAQs - Frequently Asked Questions"
+        description="Find answers to common questions about booking, pricing, facilities, and services at GreenTulip Gardens venue in Meru, Kenya."
+        keywords="GreenTulip Gardens FAQ, venue questions, booking information, pricing details, venue services, event planning"
+        url="https://greentulip.co.ke/faqs"
+      />
       {/* Hero Section */}
       <section className="relative min-h-[50vh] flex items-center justify-center">
         <div

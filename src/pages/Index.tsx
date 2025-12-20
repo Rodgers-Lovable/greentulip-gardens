@@ -12,6 +12,7 @@ import {
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { QuoteModal } from "@/components/QuoteModal";
+import SEOHead from "@/components/SEOHead";
 import heroImage from "@/assets/images/grounds.jpeg";
 import hero1Image from "@/assets/images/image_1.jpg";
 import companyData from "@/data/company.json";
@@ -82,6 +83,12 @@ export default function Index() {
 
   return (
     <Layout>
+      <SEOHead
+        title="GreenTulip Gardens - Premier Garden Venue in Meru, Kenya"
+        description="Premier garden venue in Meru, Kenya offering wedding ceremonies, picnics, accommodation, team building, and photography services in a stunning natural setting."
+        keywords="garden venue Meru, wedding venue Kenya, picnics Meru, accommodation Nkubu, team building venue, photography location Kenya"
+        url="https://greentulip.co.ke/"
+      />
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center">
         {/* Background Image */}
