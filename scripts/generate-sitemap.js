@@ -1,15 +1,12 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import companyData from "@/data/company.json";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const { company } = companyData;
-
 // Base URL from company data
-const BASE_URL = company.contact.website;
+const BASE_URL = "https://greentulip.co.ke";
 
 // Define your routes with their priorities and change frequencies
 const routes = [
