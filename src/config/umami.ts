@@ -1,13 +1,13 @@
 // Umami Analytics Configuration
 export const umamiConfig = {
   // Replace with your Umami instance URL and website ID
-  scriptSrc: process.env.VITE_UMAMI_SCRIPT_SRC || '',
-  websiteId: process.env.VITE_UMAMI_WEBSITE_ID || '',
+  scriptSrc: import.meta.env.VITE_UMAMI_SCRIPT_SRC || '',
+  websiteId: import.meta.env.VITE_UMAMI_WEBSITE_ID || '',
 
   // Enable tracking only in production
-  enabled: process.env.NODE_ENV === 'production' &&
-           process.env.VITE_UMAMI_SCRIPT_SRC &&
-           process.env.VITE_UMAMI_WEBSITE_ID,
+  enabled: import.meta.env.PROD &&
+           import.meta.env.VITE_UMAMI_SCRIPT_SRC &&
+           import.meta.env.VITE_UMAMI_WEBSITE_ID,
 
   // Custom event names for consistent tracking
   events: {
@@ -73,14 +73,13 @@ class UmamiService {
   public trackEvent(eventName: string, properties?: UmamiEventProperties): void {
     if (!this.isUmamiAvailable()) {
       // Log for development
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.DEV) {
         console.log(`[Umami Dev] Event: ${eventName}`, properties);
       }
       return;
     }
 
     try {
-      // @ts-expect-error - umami is injected by the script
       window.umami?.track(eventName, properties);
     } catch (error) {
       console.warn('Failed to track Umami event:', error);
@@ -90,14 +89,13 @@ class UmamiService {
   // Track page view (usually automatic, but can be used for SPA navigation)
   public trackPageView(url?: string, referrer?: string): void {
     if (!this.isUmamiAvailable()) {
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.DEV) {
         console.log(`[Umami Dev] Page view: ${url || window.location.pathname}`);
       }
       return;
     }
 
     try {
-      // @ts-expect-error - umami is injected by the script
       window.umami?.track('pageview', { url, referrer });
     } catch (error) {
       console.warn('Failed to track Umami page view:', error);
