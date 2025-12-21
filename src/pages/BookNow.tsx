@@ -30,12 +30,11 @@ const eventTypes = [
 ];
 
 const budgetRanges = [
-  "Below KSh 50,000",
-  "KSh 50,000 - 100,000",
-  "KSh 100,000 - 250,000",
-  "KSh 250,000 - 500,000",
-  "Above KSh 500,000",
-  "Flexible / Not Sure",
+  "Below KSh 10,000",
+  "KSh 10,000 - 20,000",
+  "KSh 20,000 - 30,000",
+  "KSh 30,000 - 50,000",
+  "Above KSh 50,000",
 ];
 
 export default function BookNow() {
