@@ -50,6 +50,8 @@ export default function BookNow() {
     eventType: "",
     preferredDate: "",
     alternativeDate: "",
+    checkInDate: "",
+    checkOutDate: "",
     guests: "",
     budget: "",
     message: "",
@@ -83,6 +85,8 @@ export default function BookNow() {
         eventType: formData.eventType,
         preferredDate: formData.preferredDate,
         alternativeDate: formData.alternativeDate,
+        checkInDate: formData.checkInDate,
+        checkOutDate: formData.checkOutDate,
         guests: formData.guests,
         budget: formData.budget,
         message: formData.message,
@@ -108,6 +112,8 @@ export default function BookNow() {
           eventType: "",
           preferredDate: "",
           alternativeDate: "",
+          checkInDate: "",
+          checkOutDate: "",
           guests: "",
           budget: "",
           message: "",
@@ -281,47 +287,92 @@ export default function BookNow() {
                     </Select>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label
-                        htmlFor="preferredDate"
-                        className="text-forest font-medium"
-                      >
-                        Preferred Date <span className="text-gold">*</span>
-                      </Label>
-                      <Input
-                        id="preferredDate"
-                        type="date"
-                        required
-                        value={formData.preferredDate}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            preferredDate: e.target.value,
-                          })
-                        }
-                      />
+                  {formData.eventType === "Accommodation" ? (
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label
+                          htmlFor="checkInDate"
+                          className="text-forest font-medium"
+                        >
+                          Check-in Date <span className="text-gold">*</span>
+                        </Label>
+                        <Input
+                          id="checkInDate"
+                          type="date"
+                          required
+                          value={formData.checkInDate}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              checkInDate: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label
+                          htmlFor="checkOutDate"
+                          className="text-forest font-medium"
+                        >
+                          Check-out Date <span className="text-gold">*</span>
+                        </Label>
+                        <Input
+                          id="checkOutDate"
+                          type="date"
+                          required
+                          value={formData.checkOutDate}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              checkOutDate: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
                     </div>
-                    <div className="space-y-2">
-                      <Label
-                        htmlFor="alternativeDate"
-                        className="text-forest font-medium"
-                      >
-                        Alternative Date
-                      </Label>
-                      <Input
-                        id="alternativeDate"
-                        type="date"
-                        value={formData.alternativeDate}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            alternativeDate: e.target.value,
-                          })
-                        }
-                      />
+                  ) : (
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label
+                          htmlFor="preferredDate"
+                          className="text-forest font-medium"
+                        >
+                          Preferred Date <span className="text-gold">*</span>
+                        </Label>
+                        <Input
+                          id="preferredDate"
+                          type="date"
+                          required
+                          value={formData.preferredDate}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              preferredDate: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label
+                          htmlFor="alternativeDate"
+                          className="text-forest font-medium"
+                        >
+                          Alternative Date
+                        </Label>
+                        <Input
+                          id="alternativeDate"
+                          type="date"
+                          value={formData.alternativeDate}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              alternativeDate: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">

@@ -30,6 +30,8 @@ export interface BookingEnquiryData {
   eventType: string;
   preferredDate: string;
   alternativeDate: string;
+  checkInDate?: string;
+  checkOutDate?: string;
   guests: string;
   budget: string;
   message: string;
@@ -94,6 +96,8 @@ export const sendBookingEnquiry = async (
       event_type: data.eventType,
       preferred_date: data.preferredDate,
       alternative_date: data.alternativeDate || "Not specified",
+      check_in_date: data.checkInDate || "Not specified",
+      check_out_date: data.checkOutDate || "Not specified",
       guests: data.guests,
       budget: data.budget || "Not specified",
       message: data.message || "No additional message",
