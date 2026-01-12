@@ -8,6 +8,21 @@ import { QuoteModal } from '@/components/QuoteModal';
 import { cn } from '@/lib/utils';
 import SEOHead from '@/components/SEOHead';
 import heroImage from '@/assets/hero-home.jpg';
+import photoImg1 from '@/assets/images/tulip.jpg';
+import photoImg2 from '@/assets/images/river.jpg';
+import photoImg3 from '@/assets/images/grounds1.jpeg';
+import photoImg4 from '@/assets/images/image_6.jpg';
+import photoImg5 from '@/assets/images/image_7.jpg';
+import photoImg6 from '@/assets/images/grounds2.jpeg';
+
+const galleryImages = [
+  { src: photoImg1, alt: 'Stunning tulip backdrop for photos' },
+  { src: photoImg2, alt: 'Beautiful riverside photo location' },
+  { src: photoImg3, alt: 'Lush garden photography spot' },
+  { src: photoImg4, alt: 'Natural lighting photoshoot area' },
+  { src: photoImg5, alt: 'Scenic outdoor filming location' },
+  { src: photoImg6, alt: 'Diverse natural photography backdrops' },
+];
 
 const features = [
   'Diverse natural backdrops',
@@ -121,7 +136,42 @@ export default function Photoshoots() {
         </div>
       </section>
 
+      {/* Image Gallery */}
       <section className="section-padding bg-secondary">
+        <div className="container mx-auto">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+            <h2 className="font-heading text-3xl md:text-4xl text-forest mb-4">Photography Locations</h2>
+            <p className="text-muted-foreground">Explore our diverse backdrops and settings for your shoot</p>
+          </motion.div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {galleryImages.map((image, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className={cn(
+                  'overflow-hidden rounded-xl',
+                  index === 0 && 'md:col-span-2 md:row-span-2'
+                )}
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className={cn(
+                    'w-full object-cover hover:scale-105 transition-transform duration-500',
+                    index === 0 ? 'h-64 md:h-full' : 'h-48 md:h-64'
+                  )}
+                />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQs */}
+      <section className="section-padding bg-cream">
         <div className="container mx-auto max-w-3xl">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
             <h2 className="font-heading text-3xl md:text-4xl text-forest mb-4">Production FAQs</h2>

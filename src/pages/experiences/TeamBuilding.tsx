@@ -8,6 +8,21 @@ import { QuoteModal } from '@/components/QuoteModal';
 import { cn } from '@/lib/utils';
 import SEOHead from '@/components/SEOHead';
 import heroImage from '@/assets/hero-home.jpg';
+import teamImg1 from '@/assets/images/handshake.jpg';
+import teamImg2 from '@/assets/images/lounge.jpeg';
+import teamImg3 from '@/assets/images/grounds.jpeg';
+import teamImg4 from '@/assets/images/grounds2.jpeg';
+import teamImg5 from '@/assets/images/image_4.jpg';
+import teamImg6 from '@/assets/images/image_5.jpg';
+
+const galleryImages = [
+  { src: teamImg1, alt: 'Team collaboration and bonding' },
+  { src: teamImg2, alt: 'Conference and meeting lounge' },
+  { src: teamImg3, alt: 'Outdoor team activity area' },
+  { src: teamImg4, alt: 'Spacious grounds for group events' },
+  { src: teamImg5, alt: 'Team building venue setting' },
+  { src: teamImg6, alt: 'Corporate retreat environment' },
+];
 
 const features = [
   'Conference facilities',
@@ -121,7 +136,42 @@ export default function TeamBuilding() {
         </div>
       </section>
 
+      {/* Image Gallery */}
       <section className="section-padding bg-secondary">
+        <div className="container mx-auto">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+            <h2 className="font-heading text-3xl md:text-4xl text-forest mb-4">Team Building Spaces</h2>
+            <p className="text-muted-foreground">See our facilities for corporate retreats and team events</p>
+          </motion.div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {galleryImages.map((image, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className={cn(
+                  'overflow-hidden rounded-xl',
+                  index === 0 && 'md:col-span-2 md:row-span-2'
+                )}
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className={cn(
+                    'w-full object-cover hover:scale-105 transition-transform duration-500',
+                    index === 0 ? 'h-64 md:h-full' : 'h-48 md:h-64'
+                  )}
+                />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQs */}
+      <section className="section-padding bg-cream">
         <div className="container mx-auto max-w-3xl">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
             <h2 className="font-heading text-3xl md:text-4xl text-forest mb-4">Corporate FAQs</h2>
