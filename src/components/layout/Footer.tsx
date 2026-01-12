@@ -171,7 +171,7 @@ export function Footer() {
               Developed & Maintained by{" "}
               <a
                 className="underline text-secondary"
-                href={developer.contact.email}
+                href={`mailto:${developer.contact.email}`}
               >
                 {developer.lastName}
               </a>
