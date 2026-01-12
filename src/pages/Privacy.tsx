@@ -119,7 +119,7 @@ export default function Privacy() {
                   If you have any questions about this Privacy Policy, please
                   contact us at:
                   <br />
-                  Email: info@greentulip.co.ke
+                  Email: {company.contact.email}
                   <br />
                   Phone: {company.contact.phone}
                 </p>

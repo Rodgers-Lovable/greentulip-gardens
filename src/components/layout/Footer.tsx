@@ -142,7 +142,7 @@ export function Footer() {
                   className="flex items-center gap-3 text-cream/80 hover:text-gold transition-colors text-sm"
                 >
                   <Mail className="h-5 w-5 text-gold shrink-0" />
-                  info@greentulipgardens.co.ke
+                  {company.contact.email}
                 </a>
               </li>
               <li className="flex items-start gap-3">
