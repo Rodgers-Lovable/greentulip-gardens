@@ -65,7 +65,7 @@ const faqCategories = [
     questions: [
       {
         question: 'What are your operating hours?',
-        answer: 'We are open Monday through Sunday, 8:00 AM to 6:00 PM. Events can be scheduled outside these hours by arrangement.',
+        answer: 'We are open Monday through Sunday, 7:00 AM to 10:00 PM. Events can be scheduled outside these hours by arrangement.',
       },
       {
         question: 'Are pets allowed at the venue?',
