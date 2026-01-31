@@ -1,24 +1,21 @@
 import { Helmet } from 'react-helmet-async';
 import { umamiConfig, umami } from '@/config/umami';
 import { useEffect } from 'react';
+import companyData from '@/data/company.json';
 
 interface SEOHeadProps {
   title?: string;
   description?: string;
   keywords?: string;
-  image?: string;
   url?: string;
-  type?: string;
   noIndex?: boolean;
 }
 
 const SEOHead = ({
-  title = "GreenTulip Gardens - Premier Garden Venue in Meru, Kenya",
-  description = "Premier garden venue in Meru, Kenya offering wedding ceremonies, picnics, accommodation, team building, and photography services in a stunning natural setting.",
-  keywords = "garden venue, wedding venue Meru, Kenya events, picnics, accommodation Meru, team building, photography venue",
-  image,
-  url = "https://greentulip.co.ke/",
-  type = "website",
+  title = companyData.company.seo.title,
+  description = companyData.company.seo.description,
+  keywords = companyData.company.seo.keywords.join(', '),
+  url = companyData.company.contact.website,
   noIndex = false,
 }: SEOHeadProps) => {
   const fullTitle = title.includes("GreenTulip Gardens") ? title : `${title} | GreenTulip Gardens`;
@@ -61,26 +58,28 @@ const SEOHead = ({
       )}
 
       {/* Open Graph */}
-      <meta property="og:title" content={fullTitle} />
-      <meta property="og:description" content={description} />
-      <meta property="og:type" content={type} />
+      <meta property="og:title" content={companyData.company.seo.openGraph.title} />
+      <meta property="og:description" content={companyData.company.seo.openGraph.description} />
+      <meta property="og:type" content={companyData.company.seo.openGraph.type} />
       <meta property="og:url" content={url} />
-      <meta property="og:site_name" content="GreenTulip Gardens" />
-      <meta property="og:locale" content="en_US" />
-      {image && (
-        <>
-          <meta property="og:image" content={image} />
-          <meta property="og:image:width" content="1200" />
-          <meta property="og:image:height" content="630" />
-        </>
-      )}
+      <meta property="og:site_name" content={companyData.company.seo.openGraph.siteName} />
+      <meta property="og:locale" content={companyData.company.seo.openGraph.locale} />
+      <meta property="og:image" content={companyData.company.seo.openGraph.image} />
+      <meta property="og:image:alt" content={companyData.company.seo.openGraph.imageAlt} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
 
       {/* Twitter */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={fullTitle} />
-      <meta name="twitter:description" content={description} />
+      <meta name="twitter:card" content={companyData.company.seo.twitter.card} />
+      <meta name="twitter:title" content={companyData.company.seo.twitter.title} />
+      <meta name="twitter:description" content={companyData.company.seo.twitter.description} />
       <meta name="twitter:url" content={url} />
-      {image && <meta name="twitter:image" content={image} />}
+      <meta name="twitter:image" content={companyData.company.seo.twitter.image} />
+
+      {/* JSON-LD Structured Data */}
+      <script type="application/ld+json">
+        {JSON.stringify(companyData.company.seo.jsonLd)}
+      </script>
     </Helmet>
   );
 };

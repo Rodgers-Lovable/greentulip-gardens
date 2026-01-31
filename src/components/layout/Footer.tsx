@@ -23,6 +23,9 @@ const legal = [
   { name: "FAQs", href: "/faqs" },
 ];
 
+const developerMessage =
+  "Hi, I came across GreenTulip Gardens and I'm interested in web development services too. Could you please provide more information? Thank you!";
+
 export function Footer() {
   const { company, developer } = companyData;
 
@@ -171,7 +174,7 @@ export function Footer() {
               Developed & Maintained by{" "}
               <a
                 className="underline text-secondary"
-                href={`mailto:${developer.contact.email}`}
+                href={`https://wa.me/${developer.contact.phone}?text=${encodeURIComponent(developerMessage)}`}
               >
                 {developer.lastName}
               </a>

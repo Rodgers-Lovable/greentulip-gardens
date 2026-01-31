@@ -39,7 +39,64 @@
         "title": "Community Focused",
         "description": "We proudly support local suppliers and contribute to the growth of Meru County's hospitality sector."
       }
-    ]
+    ],
+    "seo": {
+      "title": "GreenTulip Gardens - Premium Events & Wedding Venue in Meru Kenya",
+      "description": "Experience unforgettable moments at GreenTulip Gardens, Meru's premier events and wedding venue. Beautiful gardens, exceptional service, and stunning views in Nkubu, Kenya.",
+      "keywords": [
+        "wedding venue Meru",
+        "events venue Kenya",
+        "garden wedding Nkubu",
+        "conference venue Meru County",
+        "outdoor events Kenya",
+        "premium wedding venue",
+        "corporate events Meru",
+        "party venue Kenya",
+        "garden events",
+        "wedding photography venue"
+      ],
+      "openGraph": {
+        "title": "GreenTulip Gardens - Premier Events & Wedding Venue",
+        "description": "Create magical memories at GreenTulip Gardens. Meru's most beautiful venue for weddings, corporate events, and celebrations.",
+        "type": "website",
+        "siteName": "GreenTulip Gardens",
+        "locale": "en_KE",
+        "image": "/images/venue-hero.jpg",
+        "imageAlt": "Beautiful garden venue at GreenTulip Gardens"
+      },
+      "twitter": {
+        "card": "summary_large_image",
+        "title": "GreenTulip Gardens - Premier Events & Wedding Venue",
+        "description": "Create magical memories at GreenTulip Gardens. Meru's most beautiful venue for weddings, corporate events, and celebrations.",
+        "image": "/images/venue-hero.jpg"
+      },
+      "jsonLd": {
+        "@context": "https://schema.org",
+        "@type": "EventVenue",
+        "name": "GreenTulip Gardens",
+        "description": "Premier events and wedding venue in Meru County, Kenya",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Nkubu",
+          "addressLocality": "Meru County",
+          "addressCountry": "KE"
+        },
+        "telephone": "+254781289226",
+        "email": "info@greentulip.co.ke",
+        "url": "https://greentulip.co.ke",
+        "sameAs": [
+          "https://www.facebook.com/GreenTulipGardens",
+          "https://www.instagram.com/greentulip_gardens/"
+        ],
+        "amenityFeature": [
+          "Garden Setting",
+          "Wedding Services",
+          "Corporate Events",
+          "Catering Services",
+          "Photography Areas"
+        ]
+      }
+    }
   },
   "developer": {
     "name": "Brian Mawira",

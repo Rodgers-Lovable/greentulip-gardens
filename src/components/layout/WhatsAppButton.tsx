@@ -7,10 +7,10 @@ export function WhatsAppButton() {
   const { company } = companyData;
   const phoneNumber = company.contact.phone;
   const message = encodeURIComponent(
-    "Hello! I would like to enquire about GreenTulip Gardens."
+    "Hello! I would like to enquire about GreenTulip Gardens.",
   );
 
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   return (
     <a
@@ -23,11 +23,16 @@ export function WhatsAppButton() {
         "rounded-full",
         "shadow-large hover:shadow-glow",
         "transition-all duration-300 hover:scale-105",
-        "group"
+        "group",
       )}
       aria-label="Chat on WhatsApp"
     >
-      <img width={50} className="md:w-16" src={WhatsappLogo} alt={whatsappUrl} />
+      <img
+        width={50}
+        className="md:w-16"
+        src={WhatsappLogo}
+        alt={whatsappUrl}
+      />
     </a>
   );
 }
