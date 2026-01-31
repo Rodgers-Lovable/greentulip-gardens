@@ -9,6 +9,7 @@ export function WhatsAppButton() {
   const message = encodeURIComponent(
     "Hello! I would like to enquire about GreenTulip Gardens."
   );
+
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
 
   return (
@@ -17,7 +18,7 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "fixed bottom-10 right-8 z-40",
+        "fixed bottom-2 right-2 z-40",
         "flex items-center gap-3 p-3",
         "rounded-full",
         "shadow-large hover:shadow-glow",
@@ -26,7 +27,7 @@ export function WhatsAppButton() {
       )}
       aria-label="Chat on WhatsApp"
     >
-      <img width={70} src={WhatsappLogo} alt={whatsappUrl} />
+      <img width={50} className="md:w-16" src={WhatsappLogo} alt={whatsappUrl} />
     </a>
   );
 }
