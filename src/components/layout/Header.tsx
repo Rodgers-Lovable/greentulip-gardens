@@ -160,11 +160,11 @@ export function Header() {
           ))}
           <div className="pt-4 space-y-3">
             <a
-              href="tel:+254700000000"
+              href={`tel:${company.contact.phone}`}
               className="flex items-center gap-2 text-forest font-medium"
             >
               <Phone className="h-5 w-5" />
-              +254 700 000 000
+              {company.contact.phone}
             </a>
             <Button variant="gold" size="lg" className="w-full" asChild>
               <Link to="/book">Book Now</Link>

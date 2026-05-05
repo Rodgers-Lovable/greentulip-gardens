@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import SEOHead from '@/components/SEOHead';
 import heroImage from "@/assets/images/image_1.jpg";
+import companyData from "@/data/company.json";
 
 const faqCategories = [
   {
@@ -109,6 +110,9 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 }
 
 export default function FAQs() {
+  const { company } = companyData;
+  const whatsappNumber = company.contact.phone.replace('+', '');
+
   return (
     <Layout>
       <SEOHead
@@ -193,7 +197,7 @@ export default function FAQs() {
                 <Link to="/book">Contact Us</Link>
               </Button>
               <Button variant="hero-outline" size="lg" asChild>
-                <a href="https://wa.me/254700000000" target="_blank" rel="noopener noreferrer">
+                <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer">
                   WhatsApp Us
                 </a>
               </Button>
