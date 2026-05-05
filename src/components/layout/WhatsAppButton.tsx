@@ -31,7 +31,7 @@ export function WhatsAppButton() {
         width={50}
         className="md:w-16"
         src={WhatsappLogo}
-        alt={whatsappUrl}
+        alt="Chat with us on WhatsApp"
       />
     </a>
   );

@@ -42,11 +42,8 @@ export const sendQuoteRequest = async (
   data: QuoteRequestData
 ): Promise<boolean> => {
   try {
-    // Check if EmailJS is configured
-    if (emailjsConfig.publicKey === "YOUR_EMAILJS_PUBLIC_KEY") {
-      console.warn(
-        "EmailJS not configured. Please update the configuration in src/config/emailjs.ts"
-      );
+    if (!emailjsConfig.publicKey || !emailjsConfig.serviceId || !emailjsConfig.templates.quoteRequest) {
+      console.warn("EmailJS environment variables are not configured.");
       return false;
     }
 
@@ -80,11 +77,8 @@ export const sendBookingEnquiry = async (
   data: BookingEnquiryData
 ): Promise<boolean> => {
   try {
-    // Check if EmailJS is configured
-    if (emailjsConfig.publicKey === "YOUR_EMAILJS_PUBLIC_KEY") {
-      console.warn(
-        "EmailJS not configured. Please update the configuration in src/config/emailjs.ts"
-      );
+    if (!emailjsConfig.publicKey || !emailjsConfig.serviceId || !emailjsConfig.templates.bookingEnquiry) {
+      console.warn("EmailJS environment variables are not configured.");
       return false;
     }
 
