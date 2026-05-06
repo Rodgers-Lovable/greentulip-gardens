@@ -1,12 +1,12 @@
+'use client'
+
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link'
 import { motion } from 'framer-motion';
 import { Camera, Check, ChevronDown } from 'lucide-react';
-import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { QuoteModal } from '@/components/QuoteModal';
 import { cn } from '@/lib/utils';
-import SEOHead from '@/components/SEOHead';
 import heroImage from '@/assets/hero-home.jpg';
 import photoImg1 from '@/assets/images/tulip.jpg';
 import photoImg2 from '@/assets/images/river.jpg';
@@ -73,13 +73,8 @@ export default function Photoshoots() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
   return (
-    <Layout>
-      <SEOHead
-        title="Photography Sessions - Beautiful Backdrops at GreenTulip Gardens"
-        description="Capture stunning photos at GreenTulip Gardens with beautiful natural backdrops, perfect for weddings, portraits, and professional photography in Meru."
-        keywords="photography venue Meru, photo sessions Kenya, wedding photography, portrait photography, natural backdrops Nkubu"
-        url="https://greentulip.co.ke/experiences/photoshoots"
-      />
+    <>
+
       <section className="relative min-h-[70vh] flex items-center justify-center">
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroImage})` }}>
           <div className="absolute inset-0 bg-forest-dark/70" />
@@ -101,7 +96,7 @@ export default function Photoshoots() {
                 Request a Quote
               </Button>
               <Button variant="hero-outline" size="xl" asChild>
-                <Link to="/book">Book Now</Link>
+                <Link href="/book">Book Now</Link>
               </Button>
             </div>
           </motion.div>
@@ -199,6 +194,6 @@ export default function Photoshoots() {
       </section>
 
       <QuoteModal isOpen={isQuoteModalOpen} onClose={() => setIsQuoteModalOpen(false)} eventType="Photoshoot & Filming" />
-    </Layout>
+    </>
   );
 }

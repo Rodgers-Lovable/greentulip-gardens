@@ -1,12 +1,12 @@
+'use client'
+
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link'
 import { motion } from 'framer-motion';
 import { Building, Check, ChevronDown } from 'lucide-react';
-import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { QuoteModal } from '@/components/QuoteModal';
 import { cn } from '@/lib/utils';
-import SEOHead from '@/components/SEOHead';
 import heroImage from '@/assets/hero-home.jpg';
 import accomImg1 from '@/assets/images/accomodation.jpeg';
 import accomImg2 from '@/assets/images/accomodation1.jpeg';
@@ -89,13 +89,8 @@ export default function Accommodation() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
   return (
-    <Layout>
-      <SEOHead
-        title="Accommodation - Comfortable Stays at GreenTulip Gardens"
-        description="Stay overnight at GreenTulip Gardens with comfortable accommodation options in Nkubu, Meru. Perfect for wedding parties, events, and peaceful retreats."
-        keywords="accommodation Meru, overnight stay Nkubu, wedding accommodation, retreat accommodation, garden lodge Kenya"
-        url="https://greentulip.co.ke/experiences/accommodation"
-      />
+    <>
+
       <section className="relative min-h-[70vh] flex items-center justify-center">
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -128,7 +123,7 @@ export default function Accommodation() {
                 Request a Quote
               </Button>
               <Button variant="hero-outline" size="xl" asChild>
-                <Link to="/book">Book Now</Link>
+                <Link href="/book">Book Now</Link>
               </Button>
             </div>
           </motion.div>
@@ -264,6 +259,6 @@ export default function Accommodation() {
         onClose={() => setIsQuoteModalOpen(false)}
         eventType="Accommodation"
       />
-    </Layout>
+    </>
   );
 }

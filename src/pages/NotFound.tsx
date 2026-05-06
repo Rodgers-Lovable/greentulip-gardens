@@ -1,19 +1,21 @@
-import { useLocation, Link } from "react-router-dom";
+'use client'
+
 import { useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { Home, Calendar, Compass } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Layout } from "@/components/layout/Layout";
 
 const NotFound = () => {
-  const location = useLocation();
+  const pathname = usePathname();
 
   useEffect(() => {
-    console.error("404 Error: User attempted to access non-existent route:", location.pathname);
-  }, [location.pathname]);
+    console.error("404 Error: User attempted to access non-existent route:", pathname);
+  }, [pathname]);
 
   return (
-    <Layout>
+    <>
       <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-b from-background to-secondary/30 px-4">
         <div className="text-center max-w-xl mx-auto">
           {/* Decorative leaf element */}
@@ -67,7 +69,7 @@ const NotFound = () => {
           >
             {/* Primary CTA */}
             <Button asChild variant="gold" size="lg" className="min-w-[180px]">
-              <Link to="/">
+              <Link href="/">
                 <Home className="w-4 h-4 mr-2" />
                 Back to Home
               </Link>
@@ -75,14 +77,14 @@ const NotFound = () => {
 
             {/* Secondary CTAs */}
             <Button asChild variant="forest-outline" size="lg" className="min-w-[180px]">
-              <Link to="/book">
+              <Link href="/book">
                 <Calendar className="w-4 h-4 mr-2" />
                 Book Now
               </Link>
             </Button>
 
             <Button asChild variant="ghost" size="lg" className="text-primary hover:text-primary/80">
-              <Link to="/experiences">
+              <Link href="/experiences">
                 <Compass className="w-4 h-4 mr-2" />
                 Explore Experiences
               </Link>
@@ -98,7 +100,7 @@ const NotFound = () => {
           />
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 

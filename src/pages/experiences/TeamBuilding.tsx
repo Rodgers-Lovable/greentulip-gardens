@@ -1,12 +1,12 @@
+'use client'
+
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link'
 import { motion } from 'framer-motion';
 import { Users, Check, ChevronDown } from 'lucide-react';
-import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { QuoteModal } from '@/components/QuoteModal';
 import { cn } from '@/lib/utils';
-import SEOHead from '@/components/SEOHead';
 import heroImage from '@/assets/hero-home.jpg';
 import teamImg1 from '@/assets/images/handshake.jpg';
 import teamImg2 from '@/assets/images/lounge.jpeg';
@@ -73,13 +73,8 @@ export default function TeamBuilding() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
   return (
-    <Layout>
-      <SEOHead
-        title="Team Building - Corporate Retreats at GreenTulip Gardens"
-        description="Host successful team building events and corporate retreats at GreenTulip Gardens, Meru. Professional facilities in a peaceful natural setting."
-        keywords="team building Meru, corporate retreat Kenya, business events Nkubu, team activities, corporate accommodation"
-        url="https://greentulip.co.ke/experiences/team-building"
-      />
+    <>
+
       <section className="relative min-h-[70vh] flex items-center justify-center">
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroImage})` }}>
           <div className="absolute inset-0 bg-forest-dark/70" />
@@ -101,7 +96,7 @@ export default function TeamBuilding() {
                 Request a Quote
               </Button>
               <Button variant="hero-outline" size="xl" asChild>
-                <Link to="/book">Book Now</Link>
+                <Link href="/book">Book Now</Link>
               </Button>
             </div>
           </motion.div>
@@ -199,6 +194,6 @@ export default function TeamBuilding() {
       </section>
 
       <QuoteModal isOpen={isQuoteModalOpen} onClose={() => setIsQuoteModalOpen(false)} eventType="Team Building & Retreat" />
-    </Layout>
+    </>
   );
 }
