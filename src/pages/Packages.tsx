@@ -1,10 +1,12 @@
+'use client'
+
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
-import { Layout } from '@/components/layout/Layout';
+
 import { Button } from '@/components/ui/button';
 import { QuoteModal } from '@/components/QuoteModal';
-import SEOHead from '@/components/SEOHead';
+
 import heroImage from '@/assets/hero-home.jpg';
 
 const packages = [
@@ -91,13 +93,8 @@ export default function Packages() {
   };
 
   return (
-    <Layout>
-      <SEOHead
-        title="Packages & Pricing - Event Packages at GreenTulip Gardens"
-        description="Discover our event packages for weddings, celebrations, and corporate events. Flexible pricing and customizable options at GreenTulip Gardens, Meru."
-        keywords="event packages Meru, wedding packages Kenya, venue pricing, celebration packages, corporate event packages, GreenTulip Gardens rates"
-        url="https://greentulip.co.ke/packages"
-      />
+    <>
+
       {/* Hero Section */}
       <section className="relative min-h-[50vh] flex items-center justify-center">
         <div
@@ -222,6 +219,6 @@ export default function Packages() {
         onClose={() => setIsQuoteModalOpen(false)}
         eventType={selectedEventType}
       />
-    </Layout>
+    </>
   );
 }

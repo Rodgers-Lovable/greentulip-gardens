@@ -1,11 +1,14 @@
+'use client'
+
+import Link from 'next/link'
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
-import { Layout } from '@/components/layout/Layout';
+
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import SEOHead from '@/components/SEOHead';
+
 import heroImage from "@/assets/images/image_1.jpg";
 import companyData from "@/data/company.json";
 
@@ -114,13 +117,8 @@ export default function FAQs() {
   const whatsappNumber = company.contact.phone.replace('+', '');
 
   return (
-    <Layout>
-      <SEOHead
-        title="FAQs - Frequently Asked Questions"
-        description="Find answers to common questions about booking, pricing, facilities, and services at GreenTulip Gardens venue in Meru, Kenya."
-        keywords="GreenTulip Gardens FAQ, venue questions, booking information, pricing details, venue services, event planning"
-        url="https://greentulip.co.ke/faqs"
-      />
+    <>
+
       {/* Hero Section */}
       <section className="relative min-h-[50vh] flex items-center justify-center">
         <div
@@ -194,7 +192,7 @@ export default function FAQs() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="gold" size="lg" asChild>
-                <Link to="/book">Contact Us</Link>
+                <Link href="/book">Contact Us</Link>
               </Button>
               <Button variant="hero-outline" size="lg" asChild>
                 <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer">
@@ -205,6 +203,6 @@ export default function FAQs() {
           </motion.div>
         </div>
       </section>
-    </Layout>
+    </>
   );
 }

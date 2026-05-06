@@ -1,8 +1,10 @@
+'use client'
+
 import { motion } from "framer-motion";
 import { MapPin, Car, Clock, Phone } from "lucide-react";
-import { Layout } from "@/components/layout/Layout";
+
 import { Button } from "@/components/ui/button";
-import SEOHead from "@/components/SEOHead";
+
 import heroImage from "@/assets/images/image_1.jpg";
 import companyData from "@/data/company.json";
 
@@ -34,13 +36,8 @@ export default function Location() {
   const { company } = companyData;
 
   return (
-    <Layout>
-      <SEOHead
-        title="Location & Directions - Find Us in Nkubu, Meru"
-        description="Find GreenTulip Gardens in Nkubu, Meru County, Kenya. Get directions, contact information, and plan your visit to our beautiful garden venue."
-        keywords="GreenTulip Gardens location, Nkubu venue, Meru County directions, garden venue address, how to find venue"
-        url="https://greentulip.co.ke/location"
-      />
+    <>
+
       {/* Hero Section */}
       <section className="relative min-h-[50vh] flex items-center justify-center">
         <div
@@ -264,6 +261,6 @@ export default function Location() {
           </motion.div>
         </div>
       </section>
-    </Layout>
+    </>
   );
 }

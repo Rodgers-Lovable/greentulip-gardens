@@ -1,9 +1,11 @@
+'use client'
+
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
-import { Layout } from '@/components/layout/Layout';
+
 import { Button } from '@/components/ui/button';
-import SEOHead from '@/components/SEOHead';
+
 import heroImage from "@/assets/images/image_1.jpg";
 
 const categories = [
@@ -40,13 +42,8 @@ export default function Gallery() {
     : galleryItems.filter((item) => item.category === activeCategory);
 
   return (
-    <Layout>
-      <SEOHead
-        title="Gallery - Beautiful Moments at Our Venue"
-        description="Explore our stunning photo gallery showcasing weddings, events, and the natural beauty of GreenTulip Gardens in Meru, Kenya."
-        keywords="GreenTulip Gardens photos, wedding gallery Meru, venue photos Kenya, garden event photos, wedding inspiration"
-        url="https://greentulip.co.ke/gallery"
-      />
+    <>
+
       {/* Hero Section */}
       <section className="relative min-h-[50vh] flex items-center justify-center">
         <div
@@ -165,6 +162,6 @@ export default function Gallery() {
           </motion.div>
         )}
       </AnimatePresence>
-    </Layout>
+    </>
   );
 }

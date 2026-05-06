@@ -1,5 +1,8 @@
+'use client'
+
+import Link from 'next/link'
 import { useState } from "react";
-import { Link } from "react-router-dom";
+
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -9,10 +12,10 @@ import {
   Users,
   Camera,
 } from "lucide-react";
-import { Layout } from "@/components/layout/Layout";
+
 import { Button } from "@/components/ui/button";
 import { QuoteModal } from "@/components/QuoteModal";
-import SEOHead from "@/components/SEOHead";
+
 import heroImage from "@/assets/images/image_1.jpg";
 import weddingImage from "@/assets/images/image_1.jpg";
 import pickinImage from "@/assets/images/image_1.jpg";
@@ -25,13 +28,8 @@ export default function Experiences() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
   return (
-    <Layout>
-      <SEOHead
-        title="Experiences - Weddings, Events & More"
-        description="Discover our range of experiences at GreenTulip Gardens: weddings, picnics, accommodation, team building, and photography sessions in Meru, Kenya."
-        keywords="wedding venue Meru, picnic events Kenya, accommodation Nkubu, team building activities, photography sessions, garden events"
-        url="https://greentulip.co.ke/experiences"
-      />
+    <>
+
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center">
         <div
@@ -103,7 +101,7 @@ export default function Experiences() {
                   </ul>
                   <div className="flex gap-4">
                     <Button variant="gold" asChild>
-                      <Link to={experience.href}>
+                      <Link href={experience.href}>
                         Learn More
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Link>
@@ -149,7 +147,7 @@ export default function Experiences() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="gold" size="xl" asChild>
-                <Link to="/book">Book Now</Link>
+                <Link href="/book">Book Now</Link>
               </Button>
               <Button
                 variant="hero-outline"
@@ -167,6 +165,6 @@ export default function Experiences() {
         isOpen={isQuoteModalOpen}
         onClose={() => setIsQuoteModalOpen(false)}
       />
-    </Layout>
+    </>
   );
 }
