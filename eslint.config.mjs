@@ -9,6 +9,12 @@ const compat = new FlatCompat({ baseDirectory: __dirname })
 
 const config = [
   ...compat.extends('next/core-web-vitals'),
+  {
+    rules: {
+      'react/no-unescaped-entities': 'off',
+      '@next/next/no-img-element': 'warn',
+    },
+  },
 ]
 
 export default config

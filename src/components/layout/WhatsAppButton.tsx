@@ -30,7 +30,7 @@ export function WhatsAppButton() {
       <img
         width={50}
         className="md:w-16"
-        src={WhatsappLogo}
+        src={WhatsappLogo.src}
         alt="Chat with us on WhatsApp"
       />
     </a>
