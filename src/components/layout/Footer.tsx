@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { MapPin, Phone, Mail, Clock, Facebook, Instagram } from "lucide-react";
 import companyData from "@/data/company.json";
 
@@ -37,9 +37,7 @@ export function Footer() {
           {/* Brand Column */}
           <div className="space-y-6">
             <div>
-              <h3 className="font-heading text-2xl font-semibold">
-                {company.name}
-              </h3>
+              <h3 className="font-heading text-2xl font-semibold">{company.name}</h3>
               <p className="text-cream/70 mt-1">{company.address.full}</p>
             </div>
             <p className="text-cream/80 text-sm leading-relaxed">
@@ -70,16 +68,11 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-heading text-lg font-semibold mb-6">
-              Quick Links
-            </h4>
+            <h4 className="font-heading text-lg font-semibold mb-6">Quick Links</h4>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <Link
-                    to={link.href}
-                    className="text-cream/80 hover:text-gold transition-colors text-sm"
-                  >
+                  <Link href={link.href} className="text-cream/80 hover:text-gold transition-colors text-sm">
                     {link.name}
                   </Link>
                 </li>
@@ -89,16 +82,11 @@ export function Footer() {
 
           {/* Experiences */}
           <div>
-            <h4 className="font-heading text-lg font-semibold mb-6">
-              Experiences
-            </h4>
+            <h4 className="font-heading text-lg font-semibold mb-6">Experiences</h4>
             <ul className="space-y-3">
               {experiences.map((link) => (
                 <li key={link.name}>
-                  <Link
-                    to={link.href}
-                    className="text-cream/80 hover:text-gold transition-colors text-sm"
-                  >
+                  <Link href={link.href} className="text-cream/80 hover:text-gold transition-colors text-sm">
                     {link.name}
                   </Link>
                 </li>
@@ -108,9 +96,7 @@ export function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h4 className="font-heading text-lg font-semibold mb-6">
-              Contact Us
-            </h4>
+            <h4 className="font-heading text-lg font-semibold mb-6">Contact Us</h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-gold shrink-0 mt-0.5" />
@@ -124,7 +110,6 @@ export function Footer() {
               </li>
               <li className="flex items-end">
                 <Phone className="h-5 w-5 text-gold shrink-0 mr-2" />
-
                 <a
                   href={`tel:${company.contact.phone}`}
                   className="flex items-center gap-3 text-cream/80 hover:text-gold transition-colors text-sm"
@@ -188,7 +173,7 @@ export function Footer() {
               {legal.map((link) => (
                 <Link
                   key={link.name}
-                  to={link.href}
+                  href={link.href}
                   className="text-cream/60 hover:text-gold transition-colors text-sm"
                 >
                   {link.name}

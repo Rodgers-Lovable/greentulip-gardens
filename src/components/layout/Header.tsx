@@ -1,5 +1,8 @@
+'use client'
+
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -17,22 +20,20 @@ const navigation = [
 
 export function Header() {
   const { company } = companyData;
+  const pathname = usePathname();
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
-  }, [location]);
+  }, [pathname]);
 
   return (
     <header
@@ -46,12 +47,11 @@ export function Header() {
       <nav className="container mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/">
-            {" "}
-            <img width={110} src={companyLogo} alt={company.name} />
+          <Link href="/">
+            <img width={110} src={companyLogo.src} alt={company.name} />
           </Link>
 
-          <Link to="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <span
               className={cn(
                 "font-heading text-2xl font-semibold transition-colors duration-300",
@@ -75,13 +75,11 @@ export function Header() {
             {navigation.map((item) => (
               <Link
                 key={item.name}
-                to={item.href}
+                href={item.href}
                 className={cn(
                   "text-sm font-medium transition-colors duration-300 hover:text-gold",
-                  location.pathname === item.href
-                    ? isScrolled
-                      ? "text-gold"
-                      : "text-gold"
+                  pathname === item.href
+                    ? "text-gold"
                     : isScrolled
                     ? "text-foreground"
                     : "text-cream/90"
@@ -107,7 +105,7 @@ export function Header() {
               <span className="hidden xl:inline">{company.contact.phone}</span>
             </a>
             <Button variant="gold" size="default" asChild>
-              <Link to="/book">Book Now</Link>
+              <Link href="/book">Book Now</Link>
             </Button>
           </div>
 
@@ -118,19 +116,9 @@ export function Header() {
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
-              <X
-                className={cn(
-                  "h-6 w-6",
-                  isScrolled ? "text-forest" : "text-cream"
-                )}
-              />
+              <X className={cn("h-6 w-6", isScrolled ? "text-forest" : "text-cream")} />
             ) : (
-              <Menu
-                className={cn(
-                  "h-6 w-6",
-                  isScrolled ? "text-forest" : "text-cream"
-                )}
-              />
+              <Menu className={cn("h-6 w-6", isScrolled ? "text-forest" : "text-cream")} />
             )}
           </button>
         </div>
@@ -147,10 +135,10 @@ export function Header() {
           {navigation.map((item) => (
             <Link
               key={item.name}
-              to={item.href}
+              href={item.href}
               className={cn(
                 "block py-3 text-lg font-medium border-b border-sage/30 transition-colors",
-                location.pathname === item.href
+                pathname === item.href
                   ? "text-gold"
                   : "text-forest hover:text-gold"
               )}
@@ -167,7 +155,7 @@ export function Header() {
               {company.contact.phone}
             </a>
             <Button variant="gold" size="lg" className="w-full" asChild>
-              <Link to="/book">Book Now</Link>
+              <Link href="/book">Book Now</Link>
             </Button>
           </div>
         </div>
