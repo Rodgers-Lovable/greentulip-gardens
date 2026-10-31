@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Playfair_Display, Inter } from 'next/font/google'
+import Script from 'next/script'
 import { Providers } from '@/components/Providers'
 import companyData from '@/data/company.json'
 import './globals.css'
@@ -18,6 +19,11 @@ const inter = Inter({
 })
 
 const { company } = companyData
+
+const umamiScriptSrc = process.env.NEXT_PUBLIC_UMAMI_SCRIPT_SRC
+const umamiWebsiteId = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID
+const umamiEnabled =
+  process.env.NODE_ENV === 'production' && !!umamiScriptSrc && !!umamiWebsiteId
 
 export const metadata: Metadata = {
   title: {
@@ -62,6 +68,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <Providers>{children}</Providers>
+        {umamiEnabled && (
+          <Script
+            src={umamiScriptSrc}
+            data-website-id={umamiWebsiteId}
+            strategy="afterInteractive"
+          />
+        )}
       </body>
     </html>
   )
