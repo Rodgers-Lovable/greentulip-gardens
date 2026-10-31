@@ -12,7 +12,7 @@ const quoteSchema = z.object({
     .union([z.literal(""), z.string().trim().email().max(200)])
     .optional()
     .default(""),
-  eventType: text(80).min(1, "Event type is required"),
+  eventType: optionalText(80),
   preferredDate: optionalText(40),
   guests: optionalText(20),
   message: optionalText(5000),
@@ -23,7 +23,7 @@ const bookingSchema = z.object({
   fullName: text(120).min(1, "Name is required"),
   phone: text(40).min(1, "Phone is required"),
   email: z.string().trim().email().max(200),
-  eventType: text(80).min(1, "Event type is required"),
+  eventType: optionalText(80),
   preferredDate: optionalText(40),
   alternativeDate: optionalText(40),
   checkInDate: optionalText(40),
@@ -58,7 +58,7 @@ function buildEmail(enquiry: Enquiry) {
           ["Name", enquiry.fullName],
           ["Phone", enquiry.phone],
           ["Email", orDefault(enquiry.email)],
-          ["Event type", enquiry.eventType],
+          ["Event type", orDefault(enquiry.eventType)],
           ["Preferred date", orDefault(enquiry.preferredDate)],
           ["Guests", orDefault(enquiry.guests)],
         ]
@@ -66,7 +66,7 @@ function buildEmail(enquiry: Enquiry) {
           ["Name", enquiry.fullName],
           ["Phone", enquiry.phone],
           ["Email", enquiry.email],
-          ["Event type", enquiry.eventType],
+          ["Event type", orDefault(enquiry.eventType)],
           ["Preferred date", orDefault(enquiry.preferredDate)],
           ["Alternative date", orDefault(enquiry.alternativeDate)],
           ["Check-in date", orDefault(enquiry.checkInDate)],
