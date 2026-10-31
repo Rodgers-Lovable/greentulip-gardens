@@ -1,114 +1,16 @@
+import { render } from "@react-email/components";
+import { createElement } from "react";
 import { Resend } from "resend";
-import { z } from "zod";
+import { EnquiryConfirmation } from "@/emails/EnquiryConfirmation";
+import { EnquiryNotification } from "@/emails/EnquiryNotification";
+import { confirmationText, notificationText } from "@/emails/plainText";
+import { enquiryLabel, enquirySchema, formatDate } from "@/lib/enquiry";
 
-const text = (max: number) => z.string().trim().max(max);
-const optionalText = (max: number) => text(max).optional().default("");
-
-const quoteSchema = z.object({
-  type: z.literal("quote"),
-  fullName: text(120).min(1, "Name is required"),
-  phone: text(40).min(1, "Phone is required"),
-  email: z
-    .union([z.literal(""), z.string().trim().email().max(200)])
-    .optional()
-    .default(""),
-  eventType: optionalText(80),
-  preferredDate: optionalText(40),
-  guests: optionalText(20),
-  message: optionalText(5000),
-});
-
-const bookingSchema = z.object({
-  type: z.literal("booking"),
-  fullName: text(120).min(1, "Name is required"),
-  phone: text(40).min(1, "Phone is required"),
-  email: z.string().trim().email().max(200),
-  eventType: optionalText(80),
-  preferredDate: optionalText(40),
-  alternativeDate: optionalText(40),
-  checkInDate: optionalText(40),
-  checkOutDate: optionalText(40),
-  guests: optionalText(20),
-  budget: optionalText(80),
-  message: optionalText(5000),
-});
-
-const enquirySchema = z.discriminatedUnion("type", [
-  quoteSchema,
-  bookingSchema,
-]);
-
-type Enquiry = z.infer<typeof enquirySchema>;
-
-const escapeHtml = (value: string) =>
-  value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-
-const orDefault = (value: string, fallback = "Not specified") =>
-  value || fallback;
-
-function buildEmail(enquiry: Enquiry) {
-  const rows: [string, string][] =
-    enquiry.type === "quote"
-      ? [
-          ["Name", enquiry.fullName],
-          ["Phone", enquiry.phone],
-          ["Email", orDefault(enquiry.email)],
-          ["Event type", orDefault(enquiry.eventType)],
-          ["Preferred date", orDefault(enquiry.preferredDate)],
-          ["Guests", orDefault(enquiry.guests)],
-        ]
-      : [
-          ["Name", enquiry.fullName],
-          ["Phone", enquiry.phone],
-          ["Email", enquiry.email],
-          ["Event type", orDefault(enquiry.eventType)],
-          ["Preferred date", orDefault(enquiry.preferredDate)],
-          ["Alternative date", orDefault(enquiry.alternativeDate)],
-          ["Check-in date", orDefault(enquiry.checkInDate)],
-          ["Check-out date", orDefault(enquiry.checkOutDate)],
-          ["Guests", orDefault(enquiry.guests)],
-          ["Budget", orDefault(enquiry.budget)],
-        ];
-
-  const heading =
-    enquiry.type === "quote" ? "New quote request" : "New booking enquiry";
-  const subject = `${heading} from ${enquiry.fullName}`;
-  const message = orDefault(enquiry.message, "No message");
-
-  const html = `
-    <div style="font-family:Arial,sans-serif;color:#1f2d1f;max-width:600px">
-      <h2 style="margin:0 0 16px">${escapeHtml(heading)}</h2>
-      <table cellpadding="6" style="border-collapse:collapse">
-        ${rows
-          .map(
-            ([label, value]) =>
-              `<tr><td style="font-weight:bold;vertical-align:top">${escapeHtml(label)}</td><td>${escapeHtml(value)}</td></tr>`,
-          )
-          .join("")}
-      </table>
-      <h3 style="margin:24px 0 8px">Message</h3>
-      <p style="white-space:pre-wrap;margin:0">${escapeHtml(message)}</p>
-    </div>`;
-
-  const plain = [
-    heading,
-    "",
-    ...rows.map(([label, value]) => `${label}: ${value}`),
-    "",
-    "Message:",
-    message,
-  ].join("\n");
-
-  return { subject, html, text: plain };
-}
+// Server-only. RESEND_API_KEY never reaches the browser.
 
 const json = (body: unknown, status = 200) =>
   Response.json(body, { status, headers: { "Cache-Control": "no-store" } });
+
 
 export async function POST(request: Request): Promise<Response> {
   const apiKey = process.env.RESEND_API_KEY;
@@ -144,21 +46,47 @@ export async function POST(request: Request): Promise<Response> {
   }
 
   const enquiry = parsed.data;
-  const { subject, html, text: plain } = buildEmail(enquiry);
 
+  // Honeypot filled in: a bot. Pretend it worked so it doesn't retry.
+  if (enquiry.website) {
+    return json({ ok: true });
+  }
+
+  const teamAddresses = to.split(",").map((address) => address.trim()).filter(Boolean);
+  const label = enquiryLabel(enquiry);
   const resend = new Resend(apiKey);
-  const { error } = await resend.emails.send({
+
+  // 1. Team notification. This one must succeed.
+  const subjectBits = [enquiry.eventType, formatDate(enquiry.preferredDate)].filter(Boolean).join(", ");
+  const notification = await resend.emails.send({
     from,
-    to: to.split(",").map((address) => address.trim()),
-    subject,
-    html,
-    text: plain,
+    to: teamAddresses,
+    subject: `New ${label} from ${enquiry.fullName}${subjectBits ? ` (${subjectBits})` : ""}`,
+    html: await render(createElement(EnquiryNotification, { enquiry })),
+    text: notificationText(enquiry),
     ...(enquiry.email ? { replyTo: enquiry.email } : {}),
   });
 
-  if (error) {
-    console.error("send-enquiry: Resend error", error);
+  if (notification.error) {
+    console.error("send-enquiry: team notification failed", notification.error);
     return json({ message: "Failed to send email" }, 502);
+  }
+
+  // 2. Confirmation to the visitor. The team already has the enquiry, so a
+  //    failure here is logged but not shown to the visitor as an error.
+  if (enquiry.email) {
+    const confirmation = await resend.emails.send({
+      from,
+      to: enquiry.email,
+      subject: `We've received your ${label} | GreenTulip Gardens`,
+      html: await render(createElement(EnquiryConfirmation, { enquiry })),
+      text: confirmationText(enquiry),
+      replyTo: teamAddresses,
+    });
+
+    if (confirmation.error) {
+      console.error("send-enquiry: visitor confirmation failed", confirmation.error);
+    }
   }
 
   return json({ ok: true });
