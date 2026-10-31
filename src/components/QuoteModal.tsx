@@ -68,6 +68,7 @@ export function QuoteModal({ isOpen, onClose, eventType }: QuoteModalProps) {
         preferredDate: formData.preferredDate,
         guests: formData.guests,
         message: formData.message,
+        website: new FormData(e.currentTarget as HTMLFormElement).get("website")?.toString() ?? "",
       };
 
       const success = await sendQuoteRequest(emailData);
@@ -78,7 +79,9 @@ export function QuoteModal({ isOpen, onClose, eventType }: QuoteModalProps) {
 
         toast({
           title: "Quote Request Sent!",
-          description: "We'll get back to you within 24 hours.",
+          description: formData.email
+            ? "We'll get back to you within 24 hours. A copy of your request is on its way to your inbox."
+            : "We'll get back to you within 24 hours.",
         });
 
         // Reset form
@@ -162,7 +165,16 @@ export function QuoteModal({ isOpen, onClose, eventType }: QuoteModalProps) {
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-5">
+        <form onSubmit={handleSubmit} className="relative p-6 space-y-5">
+          {/* Honeypot: hidden from people, bots fill it in */}
+          <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="absolute -left-[9999px] h-0 w-0 opacity-0"
+          />
           {/* Full Name */}
           <div className="space-y-2">
             <Label htmlFor="fullName" className="text-forest font-medium">
