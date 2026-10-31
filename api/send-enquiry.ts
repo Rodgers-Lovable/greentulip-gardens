@@ -1,9 +1,6 @@
 import { Resend } from "resend";
 import { z } from "zod";
 
-// Server-only: runs as a Vercel Function in production and through the
-// Vite dev middleware locally. RESEND_API_KEY never reaches the browser.
-
 const text = (max: number) => z.string().trim().max(max);
 const optionalText = (max: number) => text(max).optional().default("");
 
@@ -11,7 +8,10 @@ const quoteSchema = z.object({
   type: z.literal("quote"),
   fullName: text(120).min(1, "Name is required"),
   phone: text(40).min(1, "Phone is required"),
-  email: z.union([z.literal(""), z.string().trim().email().max(200)]).optional().default(""),
+  email: z
+    .union([z.literal(""), z.string().trim().email().max(200)])
+    .optional()
+    .default(""),
   eventType: text(80).min(1, "Event type is required"),
   preferredDate: optionalText(40),
   guests: optionalText(20),
@@ -33,7 +33,10 @@ const bookingSchema = z.object({
   message: optionalText(5000),
 });
 
-const enquirySchema = z.discriminatedUnion("type", [quoteSchema, bookingSchema]);
+const enquirySchema = z.discriminatedUnion("type", [
+  quoteSchema,
+  bookingSchema,
+]);
 
 type Enquiry = z.infer<typeof enquirySchema>;
 
@@ -45,7 +48,8 @@ const escapeHtml = (value: string) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 
-const orDefault = (value: string, fallback = "Not specified") => value || fallback;
+const orDefault = (value: string, fallback = "Not specified") =>
+  value || fallback;
 
 function buildEmail(enquiry: Enquiry) {
   const rows: [string, string][] =
@@ -83,7 +87,7 @@ function buildEmail(enquiry: Enquiry) {
         ${rows
           .map(
             ([label, value]) =>
-              `<tr><td style="font-weight:bold;vertical-align:top">${escapeHtml(label)}</td><td>${escapeHtml(value)}</td></tr>`
+              `<tr><td style="font-weight:bold;vertical-align:top">${escapeHtml(label)}</td><td>${escapeHtml(value)}</td></tr>`,
           )
           .join("")}
       </table>
@@ -113,7 +117,7 @@ export async function POST(request: Request): Promise<Response> {
 
   if (!apiKey || !from || !to) {
     console.error(
-      "send-enquiry: RESEND_API_KEY, RESEND_FROM_EMAIL and ENQUIRY_TO_EMAIL must be set"
+      "send-enquiry: RESEND_API_KEY, RESEND_FROM_EMAIL and ENQUIRY_TO_EMAIL must be set",
     );
     return json({ message: "Email service is not configured" }, 500);
   }
@@ -135,7 +139,7 @@ export async function POST(request: Request): Promise<Response> {
           message: issue.message,
         })),
       },
-      400
+      400,
     );
   }
 
