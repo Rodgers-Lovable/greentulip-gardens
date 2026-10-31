@@ -9,6 +9,7 @@ export interface QuoteRequestData {
   preferredDate: string;
   guests: string;
   message: string;
+  website?: string;
 }
 
 export interface BookingEnquiryData {
@@ -23,6 +24,7 @@ export interface BookingEnquiryData {
   guests: string;
   budget: string;
   message: string;
+  website?: string;
 }
 
 type EnquiryPayload =

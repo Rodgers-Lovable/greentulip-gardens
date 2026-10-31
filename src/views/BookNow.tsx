@@ -88,6 +88,7 @@ export default function BookNow() {
         guests: formData.guests,
         budget: formData.budget,
         message: formData.message,
+        website: new FormData(e.currentTarget as HTMLFormElement).get("website")?.toString() ?? "",
       };
 
       const success = await sendBookingEnquiry(emailData);
@@ -99,7 +100,7 @@ export default function BookNow() {
         toast({
           title: "Booking Enquiry Submitted!",
           description:
-            "Our team will contact you within 24 hours to discuss your event.",
+            "Our team will contact you within 24 hours. We've emailed you a copy of your enquiry.",
         });
 
         // Reset form
@@ -198,7 +199,16 @@ export default function BookNow() {
                   Fill in your details and we'll help plan your perfect event.
                 </p>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="relative space-y-6">
+                  {/* Honeypot: hidden from people, bots fill it in */}
+                  <input
+                    type="text"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    className="absolute -left-[9999px] h-0 w-0 opacity-0"
+                  />
                   {/* Personal Details */}
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
