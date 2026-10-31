@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
-import { initializeEmailJS, sendQuoteRequest, type QuoteRequestData } from "@/services/emailService";
+import { sendQuoteRequest, type QuoteRequestData } from "@/services/emailService";
 import { umami } from "@/config/umami";
 
 interface QuoteModalProps {
@@ -44,11 +44,6 @@ export function QuoteModal({ isOpen, onClose, eventType }: QuoteModalProps) {
     message: "",
   });
 
-  // Initialize EmailJS when component mounts
-  useEffect(() => {
-    initializeEmailJS();
-  }, []);
-
   // Track modal open
   useEffect(() => {
     if (isOpen) {
@@ -64,7 +59,7 @@ export function QuoteModal({ isOpen, onClose, eventType }: QuoteModalProps) {
     umami.trackQuoteSubmission(formData.eventType, parseInt(formData.guests) || 0);
 
     try {
-      // Send email using EmailJS
+      // Send email via the Resend API route
       const emailData: QuoteRequestData = {
         fullName: formData.fullName,
         phone: formData.phone,
