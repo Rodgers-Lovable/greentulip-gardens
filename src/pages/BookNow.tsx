@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import heroImage from "@/assets/images/image_1.jpg";
-import { initializeEmailJS, sendBookingEnquiry, type BookingEnquiryData } from "@/services/emailService";
+import { sendBookingEnquiry, type BookingEnquiryData } from "@/services/emailService";
 import { umami } from "@/config/umami";
 
 const eventTypes = [
@@ -56,10 +56,7 @@ export default function BookNow() {
     message: "",
   });
 
-  // Initialize EmailJS when component mounts
   useEffect(() => {
-    initializeEmailJS();
-
     // Track page view for booking page
     umami.trackEvent('booking-page-view');
   }, []);
@@ -76,7 +73,7 @@ export default function BookNow() {
     );
 
     try {
-      // Send email using EmailJS
+      // Send email via the Resend API route
       const emailData: BookingEnquiryData = {
         fullName: formData.fullName,
         phone: formData.phone,
