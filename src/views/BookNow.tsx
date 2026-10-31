@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { addDays, format, parseISO } from "date-fns";
 import { Phone, Mail, Clock, MapPin, MessageCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -39,6 +40,9 @@ const budgetRanges = [
   "Above KSh 50,000",
 ];
 
+const toInputDate = (date: Date) => format(date, "yyyy-MM-dd");
+const dayAfter = (value: string) => toInputDate(addDays(parseISO(value), 1));
+
 export default function BookNow() {
   const { company } = companyData;
 
@@ -58,7 +62,12 @@ export default function BookNow() {
     message: "",
   });
 
+  // Set after mount so the pre-rendered page doesn't carry the build date.
+  const [today, setToday] = useState("");
+
   useEffect(() => {
+    setToday(toInputDate(new Date()));
+
     // Track page view for booking page
     umami.trackEvent('booking-page-view');
   }, []);
@@ -303,13 +312,20 @@ export default function BookNow() {
                           id="checkInDate"
                           type="date"
                           required
+                          min={today || undefined}
                           value={formData.checkInDate}
-                          onChange={(e) =>
+                          onChange={(e) => {
+                            const checkInDate = e.target.value;
                             setFormData({
                               ...formData,
-                              checkInDate: e.target.value,
-                            })
-                          }
+                              checkInDate,
+                              // Clear a check-out that is no longer after check-in.
+                              checkOutDate:
+                                checkInDate && formData.checkOutDate <= checkInDate
+                                  ? ""
+                                  : formData.checkOutDate,
+                            });
+                          }}
                         />
                       </div>
                       <div className="space-y-2">
@@ -323,6 +339,13 @@ export default function BookNow() {
                           id="checkOutDate"
                           type="date"
                           required
+                          min={
+                            formData.checkInDate
+                              ? dayAfter(formData.checkInDate)
+                              : today
+                                ? dayAfter(today)
+                                : undefined
+                          }
                           value={formData.checkOutDate}
                           onChange={(e) =>
                             setFormData({
@@ -346,6 +369,7 @@ export default function BookNow() {
                           id="preferredDate"
                           type="date"
                           required
+                          min={today || undefined}
                           value={formData.preferredDate}
                           onChange={(e) =>
                             setFormData({
@@ -365,6 +389,7 @@ export default function BookNow() {
                         <Input
                           id="alternativeDate"
                           type="date"
+                          min={today || undefined}
                           value={formData.alternativeDate}
                           onChange={(e) =>
                             setFormData({
